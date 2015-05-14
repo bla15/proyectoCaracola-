@@ -1,7 +1,10 @@
 #include <iostream>
+#include "clientes.h"
 using namespace std;
 
+
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	std::string cosa="HOLA";
+	std::cout << cosa ; // prints !!!Hello World!!!
 	return 0;
 }
