@@ -10,6 +10,10 @@ Clientes::Clientes(std::string nombre, std::string apellido, std::string clave, 
 	this->dni=dni;
 	this->telefono=telefono;
 }
+Clientes::Clientes(){
+
+}
+
 //metodos set de las variables
 void Clientes::setNombre(string nombre){
 	this->nombre=nombre;
@@ -24,6 +28,13 @@ void Clientes::setDni(int dni){
 	this->dni=dni;
 }
 void Clientes::setTelefono(int telefono){
+	this->telefono=telefono;
+}
+void Clientes::setCliente(std::string nombre, std::string apellido, std::string clave, int dni, int telefono ){
+	this->nombre=nombre;
+	this->apellido=apellido;
+	this->clave=clave;
+	this->dni=dni;
 	this->telefono=telefono;
 }
 //metodos get de las variables

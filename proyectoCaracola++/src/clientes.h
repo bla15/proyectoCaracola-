@@ -15,12 +15,14 @@ private:
 	int telefono;
 public:
 	Clientes(std::string nombre, std::string apellido, std::string clave, int dni, int telefono );
+	Clientes();
 
 	void setNombre(std::string nombre);
 	void setApellido(std::string apellido);
 	void setClave(std::string clave);
 	void setDni(int dni);
 	void setTelefono(int telefono);
+	void setCliente(std::string nombre, std::string apellido, std::string clave, int dni, int telefono );
 
 	std::string getNombre() const;
 	std::string getApellido() const;

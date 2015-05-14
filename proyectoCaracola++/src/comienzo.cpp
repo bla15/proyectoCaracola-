@@ -14,6 +14,7 @@ int enunciadoInicio(){
 	cout << "Pulsa 4 para salir" << endl;
 	fgets(str, 10, stdin);
 	sscanf(str, "%d", &num);
+	clear_if_needed(str);
 	return num;
 }
 
