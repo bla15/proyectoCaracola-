@@ -7,10 +7,11 @@
 
 #ifndef SRC_VEHICULO_H_
 #define SRC_VEHICULO_H_
+#include <iostream>
 
 namespace contenedorvehiculos{
 
-class vehiculo{
+class Vehiculo{
 
 	int matricula;
 	int antiguedad;
@@ -18,14 +19,14 @@ class vehiculo{
 
 
 public:
-vehiculo(int matricula, int antiguedad, std:: string color);
+Vehiculo(int matricula, int antiguedad, std:: string color);
 void setmatricula(int matricula);
 void setantiguedad(int antiguedad);
 void setcolor(std::string color );
 
-int getMatricula();
-int getAntiguedad();
-std:: string getColor();
+int getMatricula() const;
+int getAntiguedad() const;
+std:: string getColor() const;
 
 };
 

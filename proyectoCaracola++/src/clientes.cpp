@@ -27,19 +27,19 @@ void Clientes::setTelefono(int telefono){
 	this->telefono=telefono;
 }
 //metodos get de las variables
-string Clientes::getNombre(){
+string Clientes::getNombre()const{
 	return this->nombre;
 }
-string Clientes::getApellido(){
+string Clientes::getApellido()const{
 	return this->apellido;
 }
-string Clientes::getClave(){
+string Clientes::getClave()const{
 	return this->clave;
 }
-int Clientes::getDni(){
+int Clientes::getDni()const{
 	return this->dni;
 }
-int Clientes::getTelefono(){
+int Clientes::getTelefono()const{
 	return this->telefono;
 }
 }

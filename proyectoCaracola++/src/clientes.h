@@ -22,11 +22,11 @@ public:
 	void setDni(int dni);
 	void setTelefono(int telefono);
 
-	std::string getNombre();
-	std::string getApellido();
-	std::string getClave();
-	int getDni();
-	int getTelefono();
+	std::string getNombre() const;
+	std::string getApellido() const;
+	std::string getClave() const;
+	int getDni()const;
+	int getTelefono()const;
 
 
 };
