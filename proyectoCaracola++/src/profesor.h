@@ -8,6 +8,9 @@
 #ifndef PROFESOR_H_
 #define PROFESOR_H_
 
+#include<iostream>
+
+
 namespace contenedorProfesor{
 class Profesor{
 	int dni;
