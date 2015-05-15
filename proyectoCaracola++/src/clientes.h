@@ -14,7 +14,7 @@ private:
 	int dni;
 	int telefono;
 public:
-	Clientes(std::string nombre, std::string apellido, std::string clave, int dni, int telefono );
+	//Clientes(std::string nombre, std::string apellido, std::string clave, int dni, int telefono );
 	Clientes();
 
 	void setNombre(std::string nombre);

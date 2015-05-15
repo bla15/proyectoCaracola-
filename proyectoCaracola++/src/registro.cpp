@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "clientes.h"
+#include "profesor.h"
 using namespace std;
 using namespace contenedorClientes;
+using namespace contenedorProfesor;
 
 int enunciadoInicioII(){
 	char str[10];
@@ -37,8 +39,38 @@ void registroClientes(Clientes * misClientes, int totalClientes){
 	cout << "Escribe tu telefono" << endl;
 	cin  >> telefono;
 
+
+
+
 	//guardamos los datos del nuevo cliente
 	misClientes[totalClientes].setCliente(nombre,apellido, clave, dni, telefono);
 
 }
+
+void registroProfesores(Profesor * misProfesores, int totalProfesores){
+	char str[10];
+	string nombre;
+	string apellido;
+	string clave;
+	int dni;
+	int telefono;
+	cout << "Escribe tu nombre" << endl;
+	cin  >> nombre;
+	cout << "Escribe tu apellido" << endl;
+	cin  >> apellido;
+	cout << "Escribe tu clave" << endl;
+	cin  >> clave;
+	cout << "Escribe tu DNI" << endl;
+	cin  >> dni;
+	cout << "Escribe tu telefono" << endl;
+	cin  >> telefono;
+
+
+
+
+	//guardamos los datos del nuevo cliente
+	misProfesores[totalProfesores].setProfesor(nombre,apellido, clave, dni, telefono);
+
+}
+
 

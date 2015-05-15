@@ -14,12 +14,8 @@ namespace contenedorProfesor{
 
 
 
-	Profesor::Profesor(int dni, string clave, string nombre, string apellido, int telefono){
-		this->dni = dni;
-		this->clave = clave;
-		this->nombre = nombre;
-		this->apellido = apellido;
-		this->telefono = telefono;
+	Profesor::Profesor(){
+
 	}
 
 	int Profesor:: getDni() const{
@@ -62,6 +58,14 @@ namespace contenedorProfesor{
 	}
 
 	void Profesor:: setTelefono(int telefono){
+		this->telefono = telefono;
+	}
+
+	void Profesor:: setProfesor(string nombre, string apellido, string clave, int dni, int telefono){
+		this->nombre = nombre;
+		this->apellido = apellido;
+		this->clave = clave;
+		this->dni = dni;
 		this->telefono = telefono;
 	}
 

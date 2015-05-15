@@ -20,7 +20,10 @@ class Profesor{
 	int telefono;
 
 public:
-	Profesor(int dni, std::string clave, std::string nombre, std::string apellido, int telefono);
+	Profesor();
+
+	void setProfesor(std::string nombre, std::string apellido, std::string clave, int dni, int telefono );
+
 	int getDni() const;
 	void setDni(int dni);
 
