@@ -6,7 +6,7 @@ using namespace std;
 
 int enunciadoInicio(){
 	char str[10];
-	int num;
+	int num=0;
 	cout << "Elige una opcón" << endl;
 	cout << "Pulsa 1 para registrarse" << endl;
 	cout << "Pulsa 2 para listar" << endl;
@@ -15,7 +15,9 @@ int enunciadoInicio(){
 	fgets(str, 10, stdin);
 	sscanf(str, "%d", &num);
 	clear_if_needed(str);
+
 	return num;
+
 }
 
 void clear_if_needed(char *str) // Funcion para vaciar el buffer de la consola

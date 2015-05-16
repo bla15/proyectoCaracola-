@@ -4,6 +4,7 @@
 #include "vehiculo.h"
 #include "comienzo.h"
 #include "registro.h"
+#include "acceder.h"
 using namespace std;
 using namespace contenedorProfesor;
 using namespace contenedorClientes;
@@ -21,19 +22,45 @@ int main() {
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
 	do{
+		opcion=0;
 		opcion=enunciadoInicio();
+
 		switch(opcion){
 			case 1:
+
 				opcion2=enunciadoInicioII();
 				switch(opcion2){
 				case 1:
-					registroClientes(misClientes,totalClientes);
-					totalClientes++;break;
+					if(totalClientes<MAX_CLIENTES){
+						registroClientes(misClientes,totalClientes);
+						totalClientes++;
+					}else{
+						cout << "La lista clientes esta llena" << endl;
+					}
+
+					break;
 				case 2:
-					registroProfesores(misProfesores, totalProfesores);
-					totalProfesores++;break;
+					if(totalProfesores<MAX_PROFESORES){
+						registroProfesores(misProfesores, totalProfesores);
+						totalProfesores++;
+					}else{
+						cout << "La lista profesores esta llena" << endl;
+					}
+
+					break;
+
 				}
 				break;
+				case 2:
+					break;
+				case 3:
+					if(totalClientes+totalProfesores!=0){
+						int dni=enunciadoInicioIII();
+					}else{
+						cout << "No hay ningun cliente o profesor registrado" << endl;
+					}
+					break;
+
 		}
 
 	}while(opcion!=4);
