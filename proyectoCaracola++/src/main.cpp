@@ -17,6 +17,8 @@ int main() {
 	int opcion2;
 	int totalClientes=0;
 	int totalProfesores=0;
+	int totalVehiculos=0;
+	int totalCitas=0;
 	Clientes *misClientes=new Clientes[MAX_CLIENTES];
 	Profesor *misProfesores=new Profesor [MAX_PROFESORES];
 
@@ -56,6 +58,8 @@ int main() {
 				case 3:
 					if(totalClientes+totalProfesores!=0){
 						int dni=enunciadoInicioIII();
+						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores);
+
 					}else{
 						cout << "No hay ningun cliente o profesor registrado" << endl;
 					}
