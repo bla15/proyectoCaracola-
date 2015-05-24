@@ -13,8 +13,8 @@ using namespace contenedorClientes;
 #define MAX_PROFESORES 5
 
 int main() {
-	int opcion;
-	int opcion2;
+	int opcion = 0;
+	int opcion2 = 0;
 	int totalClientes=0;
 	int totalProfesores=0;
 	int totalVehiculos=0;
@@ -24,13 +24,14 @@ int main() {
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
 	do{
-		opcion=0;
 		opcion=enunciadoInicio();
+
 
 		switch(opcion){
 			case 1:
 
 				opcion2=enunciadoInicioII();
+
 				switch(opcion2){
 				case 1:
 					if(totalClientes<MAX_CLIENTES){

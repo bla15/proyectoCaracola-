@@ -9,15 +9,14 @@ using namespace contenedorClientes;
 using namespace contenedorProfesor;
 
 int enunciadoInicioII(){
-	char str[10];
-	int num;
+
+	int num = 0;
 	cout << "Elige una opcón" << endl;
 	cout << "Pulsa 1 para registrarse como cliente" << endl;
 	cout << "Pulsa 2 para registrarse como profesor" << endl;
 	cout << "Pulsa 3 para salir" << endl;
-	fgets(str, 10, stdin);
-	sscanf(str, "%d", &num);
-	clear_if_needed(str);
+	cin >> num;
+
 	return num;
 }
 
