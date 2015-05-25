@@ -10,12 +10,10 @@ using namespace contenedorClientes;
 using namespace contenedorProfesor;
 
 int enunciadoInicioIII(){
-		char str[10];
-		int num;
+
+		int num = 0;
 		cout << "Por favor introduce tu dni" << endl;
-		fgets(str, 10, stdin);
-		sscanf(str, "%d", &num);
-		clear_if_needed(str);
+		cin >> num;
 		return num;
 }
 
