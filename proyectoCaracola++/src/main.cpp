@@ -20,6 +20,10 @@ int main() {
 	int totalVehiculos=0;
 	int totalCitas=0;
 	Clientes *misClientes=new Clientes[MAX_CLIENTES];
+
+	misClientes[0].setCliente("prueba", "prueba", "1", 1, 1);
+	totalClientes++;
+
 	Profesor *misProfesores=new Profesor [MAX_PROFESORES];
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;

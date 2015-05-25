@@ -4,9 +4,12 @@ using namespace std;
 
 namespace contenedorClientes{
 Clientes::Clientes(){
-
+	this->apellido="";
+	this->clave="";
+	this->dni=NULL;
+	this->nombre="";
+	this->telefono=NULL;
 }
-
 
 //metodos set de las variables
 void Clientes::setNombre(string nombre){
