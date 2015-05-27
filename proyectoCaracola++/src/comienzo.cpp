@@ -12,6 +12,7 @@ int enunciadoInicio(){
 	cout << "Pulsa 2 para listar" << endl;
 	cout << "Pulsa 3 para acceder" << endl;
 	cout << "Pulsa 4 para salir" << endl;
+	cout << "Pulsa 4 para salir" << endl;
 	cin >> num;
 
 	return num;

@@ -38,6 +38,7 @@ void inicializarVehiculo(Coche ** misCoches, Moto ** misMotos, Camion ** misCami
 }
 
 int main() {
+
 	int opcion = 0;
 	int opcion2 = 0;
 	int totalClientes=0;
@@ -62,6 +63,7 @@ int main() {
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
 	do{
+
 		opcion=enunciadoInicio();
 
 
@@ -97,7 +99,7 @@ int main() {
 				case 3://para acceder
 					if(totalClientes+totalProfesores!=0){
 						int dni=enunciadoInicioIII();
-						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores);
+						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores, misCitas);
 
 					}else{
 						cout << "No hay ningun cliente o profesor registrado" << endl;
