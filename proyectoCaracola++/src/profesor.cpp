@@ -14,9 +14,13 @@ namespace contenedorProfesor{
 
 
 
-	Profesor::Profesor(){
-
-	}
+Profesor::Profesor(string nombre, string apellido, string clave, int dni, int telefono){
+	this->nombre = nombre;
+	this->apellido = apellido;
+	this->clave = clave;
+	this->dni = dni;
+	this->telefono = telefono;
+}
 
 	int Profesor:: getDni() const{
 		return this->dni;

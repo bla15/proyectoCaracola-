@@ -19,12 +19,14 @@ int main() {
 	int totalProfesores=0;
 	int totalVehiculos=0;
 	int totalCitas=0;
-	Clientes *misClientes=new Clientes[MAX_CLIENTES];
+	Clientes **misClientes=new Clientes*[MAX_CLIENTES];
 
-	misClientes[0].setCliente("prueba", "prueba", "1", 1, 1);
+	misClientes[0]= new Clientes("PEPE", "García", "1",1,1);
 	totalClientes++;
 
-	Profesor *misProfesores=new Profesor [MAX_PROFESORES];
+	Profesor **misProfesores=new Profesor* [MAX_PROFESORES];
+	misProfesores[0]= new Profesor("Ana", "García", "2",1,1);
+	totalProfesores++;
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
 	do{
@@ -32,12 +34,12 @@ int main() {
 
 
 		switch(opcion){
-			case 1:
+			case 1://Para registrarse
 
 				opcion2=enunciadoInicioII();
 
 				switch(opcion2){
-				case 1:
+				case 1://registro de clientes
 					if(totalClientes<MAX_CLIENTES){
 						registroClientes(misClientes,totalClientes);
 						totalClientes++;
@@ -46,7 +48,7 @@ int main() {
 					}
 
 					break;
-				case 2:
+				case 2://registro de profesores
 					if(totalProfesores<MAX_PROFESORES){
 						registroProfesores(misProfesores, totalProfesores);
 						totalProfesores++;

@@ -15,7 +15,7 @@ private:
 	int telefono;
 public:
 	//Clientes(std::string nombre, std::string apellido, std::string clave, int dni, int telefono );
-	Clientes();
+	Clientes(std::string nombre, std::string apellido, std::string clave, int dni, int telefono );
 
 	void setNombre(std::string nombre);
 	void setApellido(std::string apellido);

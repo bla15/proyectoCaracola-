@@ -20,7 +20,7 @@ int enunciadoInicioII(){
 	return num;
 }
 
-void registroClientes(Clientes * misClientes, int totalClientes){
+void registroClientes(Clientes ** misClientes, int totalClientes){
 	char str[10];
 	string nombre;
 	string apellido;
@@ -42,11 +42,11 @@ void registroClientes(Clientes * misClientes, int totalClientes){
 
 
 	//guardamos los datos del nuevo cliente
-	misClientes[totalClientes].setCliente(nombre,apellido, clave, dni, telefono);
+	misClientes[totalClientes] = new Clientes(nombre,apellido, clave, dni, telefono);
 
 }
 
-void registroProfesores(Profesor * misProfesores, int totalProfesores){
+void registroProfesores(Profesor ** misProfesores, int totalProfesores){
 	char str[10];
 	string nombre;
 	string apellido;
@@ -68,7 +68,7 @@ void registroProfesores(Profesor * misProfesores, int totalProfesores){
 
 
 	//guardamos los datos del nuevo cliente
-	misProfesores[totalProfesores].setProfesor(nombre,apellido, clave, dni, telefono);
+	misProfesores[totalProfesores]= new Profesor(nombre,apellido, clave, dni, telefono);
 
 }
 

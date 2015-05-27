@@ -3,12 +3,12 @@
 using namespace std;
 
 namespace contenedorClientes{
-Clientes::Clientes(){
-	this->apellido="";
-	this->clave="";
-	this->dni=NULL;
-	this->nombre="";
-	this->telefono=NULL;
+Clientes::Clientes(std::string nombre, std::string apellido, std::string clave, int dni, int telefono ){
+	this->apellido=apellido;
+	this->clave=clave;
+	this->dni=dni;
+	this->nombre=nombre;
+	this->telefono=telefono;
 }
 
 //metodos set de las variables
