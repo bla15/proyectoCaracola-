@@ -9,7 +9,7 @@
 #define CAMION_H_
 
 #include "vehiculo.h"
-using namespace contenedorvehiculos;
+using namespace contenedorVehiculos;
 
 class Camion: public Vehiculo{
 

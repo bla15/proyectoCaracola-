@@ -18,17 +18,17 @@ int enunciadoInicioIII(){
 }
 
 void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores){
-	int i=0;
-	int j=0;
+	int i;
+	int j;
 	for(i=0; i < totalClientes; i++){
 		if(misClientes[i]->getDni() == dni){
 			cout << "Bienvenido//Egunon señor/señora:  "<<misClientes[i]->getNombre()<< endl;
 			entrarCliente(totalClientes, totalVehiculos, totalCitas, misClientes[i]);
 		}
 	}
-	for(j=0; j < totalClientes; j++){
-			if(misProfesores[i]->getDni() == dni){
-				cout << "Bienvenido//Egunon señor/señora:  "<<misProfesores[i]->getNombre()<< endl;
+	for(j=0; j < totalProfesores; j++){
+			if(misProfesores[j]->getDni() == dni){
+				cout << "Bienvenido//Egunon señor/señora:  "<<misProfesores[j]->getNombre()<< endl;
 			}
 		}
 }
@@ -37,6 +37,7 @@ void entrarCliente(int totalClientes, int totalVehiculos, int &totalCitas,  Clie
 	cout << "Introduzca su contraseña "<< endl;
 	cin  >> clave;
 	if(clave.compare(misClientes->getClave()) == 0){
+
 		cout << "Contraseña CORRECTA"<< endl;
 	}else{//si es falsa la contraseña
 		cout << "Contraseña INCORRECTA"<< endl;

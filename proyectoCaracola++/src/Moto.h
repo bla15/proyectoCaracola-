@@ -9,7 +9,7 @@
 #define MOTO_H_
 
 #include "Vehiculo.h"
-using namespace contenedorvehiculos;
+using namespace contenedorVehiculos;
 
 class Moto: public Vehiculo{
 

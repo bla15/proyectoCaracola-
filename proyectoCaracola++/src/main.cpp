@@ -1,4 +1,5 @@
 #include <iostream>
+#include "DBConnector.h"
 #include "clientes.h"
 #include "profesor.h"
 #include "vehiculo.h"

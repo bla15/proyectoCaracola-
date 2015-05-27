@@ -11,7 +11,7 @@ using namespace contenedorProfesor;
 int enunciadoInicioII(){
 
 	int num = 0;
-	cout << "Elige una opcón" << endl;
+	cout << "Elige una opción" << endl;
 	cout << "Pulsa 1 para registrarse como cliente" << endl;
 	cout << "Pulsa 2 para registrarse como profesor" << endl;
 	cout << "Pulsa 3 para salir" << endl;
@@ -21,7 +21,6 @@ int enunciadoInicioII(){
 }
 
 void registroClientes(Clientes ** misClientes, int totalClientes){
-	char str[10];
 	string nombre;
 	string apellido;
 	string clave;
@@ -44,10 +43,10 @@ void registroClientes(Clientes ** misClientes, int totalClientes){
 	//guardamos los datos del nuevo cliente
 	misClientes[totalClientes] = new Clientes(nombre,apellido, clave, dni, telefono);
 
+
 }
 
 void registroProfesores(Profesor ** misProfesores, int totalProfesores){
-	char str[10];
 	string nombre;
 	string apellido;
 	string clave;
