@@ -2,7 +2,9 @@
 #include "DBConnector.h"
 #include "clientes.h"
 #include "profesor.h"
-#include "vehiculo.h"
+#include "Coche.h"
+#include "Moto.h"
+#include "Camion.h"
 #include "citas.h"
 #include "comienzo.h"
 #include "registro.h"
@@ -11,10 +13,29 @@ using namespace std;
 using namespace contenedorProfesor;
 using namespace contenedorClientes;
 using namespace contenedorCitas;
+using namespace contenedorVehiculos;
 // Definicion de la cantidad de clientes maxima
 #define MAX_CLIENTES 10
 #define MAX_PROFESORES 5
 #define MAX_CITAS 25
+#define MAX_VEHICULOS 2
+
+void inicializarVehiculo(Coche ** misCoches, Moto ** misMotos, Camion ** misCamiones){
+
+
+	misCoches[0] = new Coche(1822, 15, "Plateado", "Delantera"); // Esto lo puedo hacer? Parece que no da ningun problema, pero apunta al coche en su totalidad?
+	misMotos[0] = new Moto(2819, 2, "Rojo", 125);
+	misCamiones[0] = new Camion(8210, 6, "Blanco", 1000);
+	misCoches[1] = new Coche(6201, 3, "Verde", "Trasera");
+	misMotos[1] = new Moto(4489, 1, "Azul", 250);
+	misCamiones[1] = new Camion(7298, 7, "Negro", 1500);
+	misCoches[2] = new Coche(2247, 10, "Amarillo", "4x4");
+	misMotos[2] = new Moto(5219, 4, "Marron", 500);
+	misCamiones[2] = new Camion(9472, 8, "Gris", 1750);
+
+
+
+}
 
 int main() {
 	int opcion = 0;
@@ -32,6 +53,12 @@ int main() {
 	totalProfesores++;
 
 	Cita **misCitas=new Cita*[MAX_CITAS];
+
+	Coche ** misCoches = new Coche * [MAX_VEHICULOS]; // He intentado hacer todos los vehiculos en un solo array pero no me ha dejado
+	Moto ** misMotos = new Moto * [MAX_VEHICULOS];
+	Camion ** misCamiones = new Camion * [MAX_VEHICULOS];
+
+	inicializarVehiculo(misCoches, misMotos, misCamiones);
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
 	do{
