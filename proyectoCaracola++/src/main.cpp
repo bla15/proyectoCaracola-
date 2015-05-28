@@ -9,6 +9,7 @@
 #include "comienzo.h"
 #include "registro.h"
 #include "acceder.h"
+#include "listar.h"
 using namespace std;
 using namespace contenedorProfesor;
 using namespace contenedorClientes;
@@ -54,6 +55,8 @@ int main() {
 	totalProfesores++;
 
 	Cita **misCitas=new Cita*[MAX_CITAS];
+	misCitas[0]=new Cita(1822, 1,2);
+	totalCitas++;
 
 	Coche ** misCoches = new Coche * [MAX_VEHICULOS]; // He intentado hacer todos los vehiculos en un solo array pero no me ha dejado
 	Moto ** misMotos = new Moto * [MAX_VEHICULOS];
@@ -63,7 +66,6 @@ int main() {
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
 	do{
-
 		opcion=enunciadoInicio();
 
 
@@ -94,11 +96,18 @@ int main() {
 
 				}
 				break;
-				case 2:
+				case 2://para listar el contenido
+					if(totalClientes+totalProfesores==0){//si no hy elementos en la BD no se puede mostrar nada
+						cout<<"no hay datos guardados en la base de datos"<<endl;
+					}else{
+						enunciadoIII(totalClientes, totalProfesores, totalCitas, totalVehiculos, misClientes, misProfesores, misCitas);
+					}
+
+
 					break;
 				case 3://para acceder
 					if(totalClientes+totalProfesores!=0){
-						int dni=enunciadoInicioIII();
+						int dni=enunciadoInicioIV();
 						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores, misCitas);
 
 					}else{
