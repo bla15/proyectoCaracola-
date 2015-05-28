@@ -202,12 +202,12 @@ int DBConnector::showAllVehiculos(){ // NO SE SI OCURRIRA ALGUN PROBLEMA POR EL 
 			return SQLITE_OK;
 }
 
-int DBConnector::deleteAllClientes() {
+int DBConnector::deleteCliente(int dni) { // No nos interesa eliminar todos los clientes, solo uno
 	sqlite3_stmt *stmt;
 
-	char sql[] = "delete from Clientes";
+	char sql[] = "delete * from Clientes where dni = ?";
 
-	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ; // No se si es -1 o strlen(sql) + 1
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
@@ -215,6 +215,8 @@ int DBConnector::deleteAllClientes() {
 	}
 
 	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_bind_int(stmt, 1, dni);
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
@@ -234,7 +236,8 @@ int DBConnector::deleteAllClientes() {
 
 	return SQLITE_OK;
 }
-
+/*
+ * No creo que nos hagan falta estos deletes
 int DBConnector::deleteAllProfesores(){
 	sqlite3_stmt *stmt;
 
@@ -333,6 +336,7 @@ int DBConnector::deleteAllVehiculos(){
 
 		return SQLITE_OK;
 }
+*/
 
 // FALTA HACER LOS INSERTS
 
@@ -349,19 +353,45 @@ int DBConnector::insertNewCliente(int dni, string nombre, string apellido, strin
 
 	printf("SQL query prepared (INSERT)\n");
 
-	result = sqlite3_bind_int(stmt, 0, dni); // Metemos dni
+	result = sqlite3_bind_int(stmt, 1, dni); // Metemos dni
+	if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
 
 
-	result = sqlite3_bind_text(stmt, 1, nombre.c_str(), nombre.length(), SQLITE_STATIC);
+	result = sqlite3_bind_text(stmt, 2, nombre.c_str(), nombre.length(), SQLITE_STATIC); // metemos nombre
 	if (result != SQLITE_OK) {
 		printf("Error binding parameters\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
 
+	result = sqlite3_bind_text(stmt, 3, apellido.c_str(), apellido.length(), SQLITE_STATIC); // metemos apellido
+	if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+	result = sqlite3_bind_text(stmt, 4, clave.c_str(), clave.length(), SQLITE_STATIC); // metemos clave
+	if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+	result = sqlite3_bind_int(stmt,5,telefono); // metemos telefono
+	if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		printf("Error inserting new data into country table\n");
+		printf("Error inserting new data into Cliente table\n");
 		return result;
 	}
 
@@ -377,53 +407,128 @@ int DBConnector::insertNewCliente(int dni, string nombre, string apellido, strin
 	return SQLITE_OK;
 }
 
-int DBConnector::insertNewCountryID(int id, string name) {
+int DBConnector::insertNewProfesor(int dni, string nombre, string apellido, string clave, int telefono) {
 	sqlite3_stmt *stmt;
 
-	char sql[] = "insert into country (id, name) values (?, ?)";
-	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
-	if (result != SQLITE_OK) {
-		printf("Error preparing statement (INSERT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	}
+		char sql[] = "insert into Profesores (dni, nombre, apellido, clave, telefono) values (?, ?, ?, ?, ?)";
+		int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
 
-	printf("SQL query prepared (INSERT)\n");
+		printf("SQL query prepared (INSERT)\n");
 
-	result = sqlite3_bind_int(stmt, 1, id);
-	if (result != SQLITE_OK) {
-		printf("Error binding parameters\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	}
+		result = sqlite3_bind_int(stmt, 1, dni); // Metemos dni
+		if (result != SQLITE_OK) {
+				printf("Error binding parameters\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
 
-	result = sqlite3_bind_text(stmt, 2, name.c_str(), name.length(), SQLITE_STATIC);
-	if (result != SQLITE_OK) {
-		printf("Error binding parameters\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	}
 
-	result = sqlite3_step(stmt);
-	if (result != SQLITE_DONE) {
-		printf("Error inserting new data into country table\n");
-		return result;
-	}
+		result = sqlite3_bind_text(stmt, 2, nombre.c_str(), nombre.length(), SQLITE_STATIC); // metemos nombre
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
 
-	result = sqlite3_finalize(stmt);
-	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (INSERT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	}
+		result = sqlite3_bind_text(stmt, 3, apellido.c_str(), apellido.length(), SQLITE_STATIC); // metemos apellido
+		if (result != SQLITE_OK) {
+				printf("Error binding parameters\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
 
-	printf("Prepared statement finalized (INSERT)\n");
+		result = sqlite3_bind_text(stmt, 4, clave.c_str(), clave.length(), SQLITE_STATIC); // metemos clave
+		if (result != SQLITE_OK) {
+				printf("Error binding parameters\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
 
-	return SQLITE_OK;
+		result = sqlite3_bind_int(stmt,5,telefono); // metemos telefono
+		if (result != SQLITE_OK) {
+				printf("Error binding parameters\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
+
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			printf("Error inserting new data into Profesor table\n");
+			return result;
+		}
+
+		result = sqlite3_finalize(stmt);
+		if (result != SQLITE_OK) {
+			printf("Error finalizing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("Prepared statement finalized (INSERT)\n");
+
+		return SQLITE_OK;
+}
+
+int DBConnector::insertNewVehiculo(int matricula, int antiguedad, string color){
+	sqlite3_stmt *stmt;
+
+		char sql[] = "insert into Vehiculos (matricula, antiguedad, color) values (?, ?, ?)";
+		int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("SQL query prepared (INSERT)\n");
+
+		result = sqlite3_bind_int(stmt, 1, matricula); // Metemos matricula
+		if (result != SQLITE_OK) {
+				printf("Error binding parameters\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
+
+
+		result = sqlite3_bind_int(stmt, 2, antiguedad); // metemos antiguedad
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_bind_text(stmt, 3, color.c_str(), color.length(), SQLITE_STATIC); // metemos color
+		if (result != SQLITE_OK) {
+				printf("Error binding parameters\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
+
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			printf("Error inserting new data into vehiculo table\n");
+			return result;
+		}
+
+		result = sqlite3_finalize(stmt);
+		if (result != SQLITE_OK) {
+			printf("Error finalizing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("Prepared statement finalized (INSERT)\n");
+
+		return SQLITE_OK;
 }
 
 DBConnector::DBConnector(string dbFile) { // Aqui se abre la conexion
-	int result = sqlite3_open("test.sqlite", &db);
+	int result = sqlite3_open("Karakola.sqlite", &db);
 	if (result != SQLITE_OK) {
 		printf("Error opening database\n");
 
@@ -433,7 +538,7 @@ DBConnector::DBConnector(string dbFile) { // Aqui se abre la conexion
 DBConnector::~DBConnector() { // Aqui se cierra la conexion
 	int result = sqlite3_close(db);
 	if (result != SQLITE_OK) {
-		printf("Error opening database\n");
+		printf("Error closing database\n");
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 }

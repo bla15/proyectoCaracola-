@@ -23,13 +23,14 @@ public:
 	int showAllProfesores();
 	int showAllCitas();
 	int showAllVehiculos();
-	int deleteAllClientes();
+	int deleteCliente(int dni);
 	int deleteAllProfesores();
 	int deleteAllCitas();
 	int deleteAllVehiculos();
 	int insertNewCliente(int dni, string nombre, string apellido, string clave, int telefono);
-	int insertNewCountryID(int id, string name);
-	DBConnector(std::string dbFile);
+	int insertNewProfesor(int dni, string nombre, string apellido, string clave, int telefono);
+	int insertNewVehiculo(int matricula, int antiguedad, string color);
+	DBConnector(string dbFile);
 	~DBConnector();
 };
 
