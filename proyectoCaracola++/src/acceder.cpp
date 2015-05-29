@@ -30,7 +30,7 @@ void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int
 	for(i=0; i < totalClientes; i++){
 		if(misClientes[i]->getDni() == dni){
 			cout << "Bienvenido//Egunon señor/señora:  "<<misClientes[i]->getNombre()<< endl;
-			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas, misVehiculos);
+			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas, misVehiculos, misProfesores);
 			bandera=1;
 		}
 	}
@@ -44,19 +44,19 @@ void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int
 		cout<<"No se ha encontrado ninguna coincidencia"<<endl;
 	}
 }
-void entrarCliente(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos){
+void entrarCliente(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores){
 	string clave;
 	cout << "Introduzca su contraseña "<< endl;
 	cin  >> clave;
 	if(clave.compare(misClientes->getClave()) == 0){
 		cout << "Contraseña CORRECTA"<< endl;
-		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos);
+		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores);
 	}else{//si es falsa la contraseña
 		cout << "Contraseña INCORRECTA"<< endl;
 	}
 }
 
-void opcionesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos){
-	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos);
+void opcionesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores){
+	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores);
 }
 

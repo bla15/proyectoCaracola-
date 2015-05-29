@@ -8,7 +8,7 @@ using namespace std;//para el cout y endl
 using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
-void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos){
+void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor** misProfesores){
 	int opcion;
 	do{
 		cout<<endl;
@@ -26,7 +26,7 @@ void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVe
 			cambiarInformacion(misClientes);
 			break;
 		case 3://para pedir una cita
-			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes);
+			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misProfesores, misVehiculos);
 			break;
 		case 4://para eliminar este cliente
 
@@ -97,8 +97,14 @@ void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes){
 
 	}
 }
-void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes){
-
+void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores, Vehiculo** misVehiculos ){
+	string dni;
+	cout<<"En esta autoescuela hay los siguientes profesores: "<<endl;
+	for(int i=0;i<totalProfesores;i++){
+		cout<<misProfesores[i]->getNombre()<<" con DNI: "<<misProfesores[i]->getDni()<<endl;
+		cout<<"Introduce el DNI del profesor para la cita: "<<endl;
+		cin>>dni;
+	}
 }
 
 void eliminarCliente(int *totalClientes, int * totalCitas, Clientes* misClientes){
