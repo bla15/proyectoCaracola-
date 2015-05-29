@@ -27,9 +27,11 @@ void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVe
 			break;
 		case 3://para pedir una cita
 			if(totalCitas<5){
+
+			}else{
 				cout<<"El array de citas esta lleno"<<endl;
 			}
-			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misProfesores, misVehiculos);
+			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misProfesores,misCitas, misVehiculos);
 			break;
 		case 4://para eliminar este cliente
 
@@ -100,7 +102,7 @@ void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes){
 
 	}
 }
-void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores, Vehiculo** misVehiculos ){
+void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores,  Cita** misCitas, Vehiculo** misVehiculos ){
 	int dni;
 	int matricula;
 	cout<<"En esta autoescuela hay los siguientes profesores: "<<endl;
@@ -120,7 +122,7 @@ void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  
 		cout<<"Elige un vehiculo, introduciendo su matricula"<<endl;
 		cin>>matricula;
 		if(comprobarMatricula(totalVehiculos, matricula, misVehiculos)==true){
-			cout<<"BIENNNNNNNNNN"<<endl;
+			crearCitas(totalCitas, misCitas, dni, matricula, misClientes);
 		}else{
 			cout<<"No existe esa matricula"<<endl;
 		}
@@ -147,13 +149,14 @@ bool comprobarMatricula(int totalVehiculo, int matricula, Vehiculo** misVehiculo
 
 		if(misVehiculos[i]->getMatricula()==matricula){
 			existe=true;
-
 		}
 	}
 	return existe;
 }
-void crearCitas(int totalCitas, Cita** miscitas, int dni, int matricula){
-
+void crearCitas(int& totalCitas, Cita** miscitas, int dniProfesor, int matricula, Clientes* misClientes){
+miscitas[totalCitas]=new Cita(matricula, misClientes->getDni(),dniProfesor);
+totalCitas++;
+cout<<"Cita creada"<<endl;
 }
 void eliminarCliente(int *totalClientes, int * totalCitas, Clientes* misClientes){
 

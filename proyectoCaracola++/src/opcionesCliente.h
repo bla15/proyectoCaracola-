@@ -7,9 +7,9 @@ void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVe
 void verInforDelCliente(int totalClientes, int totalCitas, Clientes* misClientes, Cita** misCitas);
 void cambiarInformacion(Clientes* misClientes);
 void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes);
-void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes,  Profesor** misProfesores, Vehiculo** misVehiculos );
+void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes,  Profesor** misProfesores, Cita** misCitas, Vehiculo** misVehiculos );
 bool comprobarDNI(int totalProfesores, int dni,  Profesor** misProfesores );
 bool comprobarMatricula(int totalVehiculo, int matricula, Vehiculo** misVehiculos);
-void crearCitas(int totalCitas, Cita** miscitas, int dni, int matricula);
+void crearCitas(int& totalCitas, Cita** miscitas, int dniProfesor, int matricula, Clientes* misClientes);
 void eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes);
 #endif
