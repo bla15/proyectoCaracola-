@@ -490,7 +490,6 @@ int DBConnector::insertNewVehiculo(int matricula, int antiguedad, string color){
 		result = sqlite3_bind_int(stmt, 1, matricula); // Metemos matricula
 		if (result != SQLITE_OK) {
 				printf("Error binding parameters\n");
-				printf("%s\n", sqlite3_errmsg(db));
 				return result;
 			}
 
@@ -512,6 +511,7 @@ int DBConnector::insertNewVehiculo(int matricula, int antiguedad, string color){
 		result = sqlite3_step(stmt);
 		if (result != SQLITE_DONE) {
 			printf("Error inserting new data into vehiculo table\n");
+			printf("%d\n", result);
 			return result;
 		}
 

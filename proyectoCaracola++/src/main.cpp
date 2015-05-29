@@ -19,29 +19,29 @@ using namespace contenedorVehiculos;
 #define MAX_CLIENTES 10
 #define MAX_PROFESORES 5
 #define MAX_CITAS 25
-#define MAX_VEHICULOS 3
+#define MAX_VEHICULOS 9
 
-void inicializarVehiculo(Coche ** misCoches, Moto ** misMotos, Camion ** misCamiones, DBConnector dbconnector){
+void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector dbconnector){
 
 
-	misCoches[0] = new Coche(1822, 15, "Plateado", "Delantera");
-	dbconnector.insertNewVehiculo(misCoches[0]->getMatricula(), misCoches[0]->getAntiguedad(), misCoches[0]->getColor());
-	misMotos[0] = new Moto(2819, 2, "Rojo", 125);
-	dbconnector.insertNewVehiculo(misMotos[0]->getMatricula(), misMotos[0]->getAntiguedad(), misMotos[0]->getColor());
-	misCamiones[0] = new Camion(8210, 6, "Blanco", 1000);
-	dbconnector.insertNewVehiculo(misCamiones[0]->getMatricula(), misCamiones[0]->getAntiguedad(), misCamiones[0]->getColor());
-	misCoches[1] = new Coche(6201, 3, "Verde", "Trasera");
-	dbconnector.insertNewVehiculo(misCoches[1]->getMatricula(), misCoches[1]->getAntiguedad(), misCoches[1]->getColor());
-	misMotos[1] = new Moto(4489, 1, "Azul", 250);
-	dbconnector.insertNewVehiculo(misMotos[1]->getMatricula(), misMotos[1]->getAntiguedad(), misMotos[1]->getColor());
-	misCamiones[1] = new Camion(7298, 7, "Negro", 1500);
-	dbconnector.insertNewVehiculo(misCamiones[1]->getMatricula(), misCamiones[1]->getAntiguedad(), misCamiones[1]->getColor());
-	misCoches[2] = new Coche(2247, 10, "Amarillo", "4x4");
-	dbconnector.insertNewVehiculo(misCoches[2]->getMatricula(), misCoches[2]->getAntiguedad(), misCoches[2]->getColor());
-	misMotos[2] = new Moto(5219, 4, "Marron", 500);
-	dbconnector.insertNewVehiculo(misMotos[2]->getMatricula(), misMotos[2]->getAntiguedad(), misMotos[2]->getColor());
-	misCamiones[2] = new Camion(9472, 8, "Gris", 1750);
-	dbconnector.insertNewVehiculo(misCamiones[2]->getMatricula(), misCamiones[2]->getAntiguedad(), misCamiones[2]->getColor());
+	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");
+	dbconnector.insertNewVehiculo(misVehiculos[0]->getMatricula(), misVehiculos[0]->getAntiguedad(), misVehiculos[0]->getColor());
+	misVehiculos[1] = new Moto(2819, 2, "Rojo", 125);
+	dbconnector.insertNewVehiculo(misVehiculos[1]->getMatricula(), misVehiculos[1]->getAntiguedad(),misVehiculos[1]->getColor());
+	misVehiculos[2] = new Camion(8210, 6, "Blanco", 1000);
+	dbconnector.insertNewVehiculo(misVehiculos[2]->getMatricula(), misVehiculos[2]->getAntiguedad(), misVehiculos[2]->getColor());
+	misVehiculos[3] = new Coche(6201, 3, "Verde", "Trasera");
+	dbconnector.insertNewVehiculo(misVehiculos[3]->getMatricula(),misVehiculos[3]->getAntiguedad(), misVehiculos[3]->getColor());
+	misVehiculos[4] = new Moto(4489, 1, "Azul", 250);
+	dbconnector.insertNewVehiculo(misVehiculos[4]->getMatricula(), misVehiculos[4]->getAntiguedad(), misVehiculos[4]->getColor());
+	misVehiculos[5] = new Camion(7298, 7, "Negro", 1500);
+	dbconnector.insertNewVehiculo(misVehiculos[5]->getMatricula(), misVehiculos[5]->getAntiguedad(), misVehiculos[5]->getColor());
+	misVehiculos[6] = new Coche(2247, 10, "Amarillo", "4x4");
+	dbconnector.insertNewVehiculo(misVehiculos[6]->getMatricula(),misVehiculos[6]->getAntiguedad(), misVehiculos[6]->getColor());
+	misVehiculos[7] = new Moto(5219, 4, "Marron", 500);
+	dbconnector.insertNewVehiculo(misVehiculos[7]->getMatricula(), misVehiculos[7]->getAntiguedad(), misVehiculos[7]->getColor());
+	misVehiculos[8] = new Camion(9472, 8, "Gris", 1750);
+	dbconnector.insertNewVehiculo(misVehiculos[8]->getMatricula(), misVehiculos[8]->getAntiguedad(), misVehiculos[8]->getColor());
 
 
 }
@@ -71,11 +71,10 @@ int main() {
 	misCitas[0]=new Cita(1822, 1,2);
 	totalCitas++;
 
-	Coche ** misCoches = new Coche * [MAX_VEHICULOS]; // He intentado hacer todos los vehiculos en un solo array pero no me ha dejado
-	Moto ** misMotos = new Moto * [MAX_VEHICULOS];
-	Camion ** misCamiones = new Camion * [MAX_VEHICULOS];
+	Vehiculo ** misVehiculos = new Vehiculo * [MAX_VEHICULOS];
+	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");
 
-	inicializarVehiculo(misCoches, misMotos, misCamiones, dbconnector);
+	inicializarVehiculo(misVehiculos, dbconnector);
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
 	do{
