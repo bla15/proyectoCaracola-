@@ -16,7 +16,7 @@ using namespace std;
 class DBConnector {
 
 private:
-		sqlite3 *db = NULL; // Antes, en el main.c, este puntero a sqlite3 estaba como parametro
+		sqlite3 *db = NULL; // Antes, en el main.c, este puntero a sqlite3 estaba como parametro.
 
 public:
 	int showAllClientes();

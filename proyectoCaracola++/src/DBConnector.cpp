@@ -11,7 +11,7 @@
 int DBConnector::showAllClientes() {
 	sqlite3_stmt *stmt; // Statement
 
-	char sql[] = "select dni, nombre, apellido, clave, telefono from Clientes"; // El SELECT
+	char sql[] = "select dni, nombre, apellido, clave, telefono from Clientes"; // El SELECT.
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {

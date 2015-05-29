@@ -133,6 +133,7 @@ int main() {
 
 	dbconnector.deleteAllClientes();
 	dbconnector.deleteAllVehiculos();
+	// modificado otra vez
 
 	return 0;
 }
