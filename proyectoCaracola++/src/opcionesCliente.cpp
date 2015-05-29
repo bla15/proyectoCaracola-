@@ -8,7 +8,7 @@ using namespace std;//para el cout y endl
 using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
-void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas){
+void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos){
 	int opcion;
 	do{
 		cout<<endl;

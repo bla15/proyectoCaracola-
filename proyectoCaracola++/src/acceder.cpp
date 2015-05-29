@@ -2,7 +2,7 @@
 #include <stdio.h>//para usar fgtes y sscanf
 #include "clientes.h"//para usar sus metodos
 #include "profesor.h"//para usar sus metodos
-//los vehiculos aqui
+#include "vehiculo.h"//para usar sus metodods
 #include "citas.h"
 #include "acceder.h"
 #include "opcionesCliente.h"//para poder llamar a sus metodos
@@ -13,6 +13,7 @@ using namespace std;//para el cout y endl
 using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
+using namespace contenedorVehiculos;
 
 int enunciadoInicioIV(){
 
@@ -22,14 +23,14 @@ int enunciadoInicioIV(){
 		return num;
 }
 
-void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores, Cita** misCitas){
+void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores, Cita** misCitas, Vehiculo** misVehiculos){
 	int i=0;
 	int j=0;
 	int bandera=0;
 	for(i=0; i < totalClientes; i++){
 		if(misClientes[i]->getDni() == dni){
 			cout << "Bienvenido//Egunon señor/señora:  "<<misClientes[i]->getNombre()<< endl;
-			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas);
+			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas, misVehiculos);
 			bandera=1;
 		}
 	}
@@ -43,19 +44,19 @@ void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int
 		cout<<"No se ha encontrado ninguna coincidencia"<<endl;
 	}
 }
-void entrarCliente(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas){
+void entrarCliente(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos){
 	string clave;
 	cout << "Introduzca su contraseña "<< endl;
 	cin  >> clave;
 	if(clave.compare(misClientes->getClave()) == 0){
 		cout << "Contraseña CORRECTA"<< endl;
-		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas );
+		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos);
 	}else{//si es falsa la contraseña
 		cout << "Contraseña INCORRECTA"<< endl;
 	}
 }
 
-void opcionesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas){
-	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas );
+void opcionesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos){
+	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos);
 }
 

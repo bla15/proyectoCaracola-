@@ -2,6 +2,7 @@
 #include "DBConnector.h"
 #include "clientes.h"
 #include "profesor.h"
+#include "vehiculo.h"
 #include "Coche.h"
 #include "Moto.h"
 #include "Camion.h"
@@ -23,7 +24,6 @@ using namespace contenedorVehiculos;
 
 void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector dbconnector){
 
-
 	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");
 	dbconnector.insertNewVehiculo(misVehiculos[0]->getMatricula(), misVehiculos[0]->getAntiguedad(), misVehiculos[0]->getColor());
 	misVehiculos[1] = new Moto(2819, 2, "Rojo", 125);
@@ -42,8 +42,6 @@ void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector dbconnector){
 	dbconnector.insertNewVehiculo(misVehiculos[7]->getMatricula(), misVehiculos[7]->getAntiguedad(), misVehiculos[7]->getColor());
 	misVehiculos[8] = new Camion(9472, 8, "Gris", 1750);
 	dbconnector.insertNewVehiculo(misVehiculos[8]->getMatricula(), misVehiculos[8]->getAntiguedad(), misVehiculos[8]->getColor());
-
-
 }
 
 int main() {
@@ -120,13 +118,12 @@ int main() {
 				case 3://para acceder
 					if(totalClientes+totalProfesores!=0){
 						int dni=enunciadoInicioIV();
-						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores, misCitas);
+						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores, misCitas, misVehiculos);
 
 					}else{
 						cout << "No hay ningun cliente o profesor registrado" << endl;
 					}
 					break;
-
 		}
 
 	}while(opcion!=4);
