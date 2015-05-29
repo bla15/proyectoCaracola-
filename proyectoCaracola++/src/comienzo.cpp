@@ -4,6 +4,9 @@
 #include <string.h>
 using namespace std;
 
+//En esta clase, tenemos la pantalla principal, por así decirlo.
+//Tenemos 4 opciones: registrarse, listar, acceder y salir.
+
 int enunciadoInicio(){
 
 	int num=0;

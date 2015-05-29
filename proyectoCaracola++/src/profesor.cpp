@@ -13,7 +13,7 @@ using namespace std;
 namespace contenedorProfesor{
 
 
-
+////metodos get y set de las variables
 Profesor::Profesor(string nombre, string apellido, string clave, int dni, int telefono){
 	this->nombre = nombre;
 	this->apellido = apellido;

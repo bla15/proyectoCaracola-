@@ -9,6 +9,7 @@ using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
 
+//Aqui el cliente podrá elegir una de las opciones que se le da
 void enunciadoOpcinesCliente(int &totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor** misProfesores, Clientes** cliente, DBConnector &dbconnector){
 	int opcion;
 
@@ -44,6 +45,8 @@ void enunciadoOpcinesCliente(int &totalClientes, int totalProfesores, int totalV
 }while((opcion!=5));
 
 }
+
+//metodo para ver la información del cliente
 void verInforDelCliente(int& totalClientes, int totalCitas, Clientes* misClientes, Cita** misCitas){
 	mostrarClienteDetallado(misClientes);
 	//ahora comprobamos si hay alguna cita para este profesor
@@ -56,6 +59,7 @@ void verInforDelCliente(int& totalClientes, int totalCitas, Clientes* misCliente
 		}
 	}
 }
+//metodo para cambiar la informacion del cliente
 void cambiarInformacion(Clientes* misClientes, DBConnector &dbconnector){
 	int opcionDos;
 	cout<<"Pulsa 1 para cambiar el nombre"<<endl;
@@ -66,6 +70,7 @@ void cambiarInformacion(Clientes* misClientes, DBConnector &dbconnector){
 	cin>>opcionDos;
 	cambiarInformacionMecanismo(opcionDos, misClientes, dbconnector);
 }
+
 void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes, DBConnector &dbconnector){
 	string nombre;
 	string apellido;
@@ -103,6 +108,7 @@ void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes, DBConnect
 
 	}
 }
+//metodo para que un cliente pueda pedir una cita con un profesor
 void pedirCita(int &totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores,  Cita** misCitas, Vehiculo** misVehiculos, DBConnector &dbconnector){
 	int dni;
 	int matricula;
@@ -128,6 +134,7 @@ void pedirCita(int &totalClientes, int totalProfesores, int totalVehiculos, int 
 	}
 
 }
+//mediante este metodo podemos comprobar si el DNI existe o no
 bool comprobarDNI(int totalProfesores, int dni, Profesor** misProfesores){
 	int existe=false;
 
@@ -140,6 +147,7 @@ bool comprobarDNI(int totalProfesores, int dni, Profesor** misProfesores){
 
 	return existe;
 }
+//mediante este metodo podemos comprobar si la matricula del vehiculo es correcta o no
 bool comprobarMatricula(int totalVehiculo, int matricula, Vehiculo** misVehiculos){
 	int existe=false;
 	for(int i=0; i<totalVehiculo;i++){
@@ -150,12 +158,14 @@ bool comprobarMatricula(int totalVehiculo, int matricula, Vehiculo** misVehiculo
 	}
 	return existe;
 }
+//este metodo sirve para crear citas entre un profesor un vehiculo y un cliente
 void crearCitas(int& totalCitas, Cita** miscitas, int dniProfesor, int matricula, Clientes* misClientes, DBConnector &dbconnector){
 	miscitas[totalCitas]=new Cita(matricula, misClientes->getDni(),dniProfesor);
 	totalCitas++;
 	dbconnector.insertNewCita(matricula, misClientes->getDni(), dniProfesor);
 	cout<<"Cita creada"<<endl;
 }
+//mediante este metodo podremos eliminar un cliente
 int eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes,  Cita** misCitas, Clientes** cliente, DBConnector &dbconnector){
 	int bandera=4;
 	int seguro;

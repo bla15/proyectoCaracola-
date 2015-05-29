@@ -6,7 +6,7 @@
  */
 
 #include "Moto.h"
-
+//heredamos de la clase vehiculos y le añadimos el atributo cilindrada
 Moto::Moto(int matricula, int antiguedad, string color, int cilindrada): Vehiculo(matricula, antiguedad, color){
 
 	this->cilindrada = cilindrada;

@@ -6,7 +6,7 @@
  */
 
 #include "Camion.h"
-
+//heredamos de la clase vehiculos y le añadimos el atributo peso
 Camion::Camion(int matricula, int antiguedad, string color, int peso): Vehiculo(matricula, antiguedad, color){
 
 	this->peso = peso;

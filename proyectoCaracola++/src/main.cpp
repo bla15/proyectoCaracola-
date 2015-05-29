@@ -22,7 +22,7 @@ using namespace contenedorVehiculos;
 #define MAX_CITAS 25
 #define MAX_VEHICULOS 9
 
-
+//mediante este metodo inicializamos los vehiculos
 void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector &dbconnector){ // Inicializacion de los vehiculos e inserción de los mismos en la BD
 
 	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");

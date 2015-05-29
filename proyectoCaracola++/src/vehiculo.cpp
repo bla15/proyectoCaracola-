@@ -11,7 +11,7 @@ using namespace std;
 
 namespace contenedorVehiculos{
 
-
+////metodos get y set de las variables
  Vehiculo:: Vehiculo(int matricula, int antiguedad, std:: string color ){
 	 this->matricula=matricula;
 	 this->antiguedad=antiguedad;

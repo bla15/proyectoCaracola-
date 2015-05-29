@@ -9,6 +9,8 @@ using namespace std;
 using namespace contenedorClientes;
 using namespace contenedorProfesor;
 
+//Si el usuario elige la opción de registrarse, luego tendrá estas 3 opciones:
+//registrarse como cliente, como profesor o salir
 int enunciadoInicioII(){
 
 	int num = 0;
@@ -20,7 +22,8 @@ int enunciadoInicioII(){
 
 	return num;
 }
-
+//En caso de que quiera registrarse como cliente,
+//tendrá que introducir estos 5 datos y esto se guardará en la base de datos
 void registroClientes(Clientes ** misClientes, int totalClientes, DBConnector &dbconnector){
 	string nombre;
 	string apellido;
@@ -48,6 +51,8 @@ void registroClientes(Clientes ** misClientes, int totalClientes, DBConnector &d
 
 }
 
+//En caso de que quiera registrarse como profesor,
+//tendrá que introducir estos 5 datos y esto se guardará en la base de datos
 void registroProfesores(Profesor ** misProfesores, int totalProfesores, DBConnector &dbconnector){
 	string nombre;
 	string apellido;

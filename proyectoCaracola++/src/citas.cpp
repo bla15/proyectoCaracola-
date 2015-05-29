@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+//aqui hacemos los get de las variables que necesitamos para pedir una cita; es decir,
+//la matricula del vehiculo, el DNI del cliente y el DNI del profesor
 namespace contenedorCitas{
 Cita::Cita(int matricula, int dniCl, int dniProf){
 	this->matricula=matricula;

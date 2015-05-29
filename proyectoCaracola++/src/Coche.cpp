@@ -7,7 +7,7 @@
  */
 
 #include "Coche.h"
-
+//heredamos de la clase vehiculos y le añadimos el atributo traccion
 Coche::Coche(int matricula, int antiguedad, string color, string traccion): Vehiculo(matricula, antiguedad, color){
 
 	this->traccion = traccion;

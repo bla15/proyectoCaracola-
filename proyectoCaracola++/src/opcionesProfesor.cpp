@@ -10,6 +10,7 @@ using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
 
+//mediante este metodo podemos ver la informacion del profesor
 void verInforDelProfesor(int totalProfesores, int totalCitas, Profesor* misProfesores, Cita** misCitas, DBConnector &dbconnector){
 	mostrarProfesoresDetallado(misProfesores);
 	for(int i=0;i<totalCitas;i++){
@@ -20,7 +21,7 @@ void verInforDelProfesor(int totalProfesores, int totalCitas, Profesor* misProfe
 		}
 	}
 }
-
+//estas son las 3 opciones que tiene el profesor: ver los datos de forma detallada, ver los vehiculos o salir
 void  enunciadoOpcionesProfesor(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Profesor *misProfesores, Vehiculo ** misVehiculos,  Cita **misCitas, DBConnector &dbconnector){
 	int opcion;
 	do{

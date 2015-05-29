@@ -16,6 +16,7 @@ using namespace contenedorProfesor;
 using namespace contenedorCitas;
 using namespace contenedorVehiculos;
 
+//aqui introducimos nuestro DNI
 int enunciadoInicioIV(){
 
 		int num = 0;
@@ -24,6 +25,7 @@ int enunciadoInicioIV(){
 		return num;
 }
 
+//Comprobamos si el DNI introducido corresponde a un cliente o a un profesor o a nadie
 void comprobarCP(int &totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores, Cita** misCitas, Vehiculo** misVehiculos, DBConnector &dbconnector){
 	int i=0;
 	int j=0;
@@ -46,6 +48,7 @@ void comprobarCP(int &totalClientes, int totalProfesores, int totalVehiculos, in
 		cout<<"No se ha encontrado ninguna coincidencia"<<endl;
 	}
 }
+//En caso de que sea un cliente, entrará como cliente y tendrá varias opciones
 void entrarCliente(int &totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente, DBConnector &dbconnector){
 	string clave;
 	cout << "Introduzca su contraseña "<< endl;
@@ -57,7 +60,7 @@ void entrarCliente(int &totalClientes, int totalProfesores, int totalVehiculos, 
 		cout << "Contraseña INCORRECTA"<< endl;
 	}
 }
-
+//En caso de que sea un profesor, entrará como profesor y tendrá varias opciones
 void entrarProfesores(int& totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes, DBConnector &dbconnector){
 	string clave;
 		cout << "Introduzca su contraseña "<< endl;
@@ -69,11 +72,11 @@ void entrarProfesores(int& totalClientes, int totalProfesores, int totalVehiculo
 			cout << "Contraseña INCORRECTA"<< endl;
 		}
 }
-
+//Cuando acceda como cliente, llegará aqui y podrá elegir entre las opciones que tiene
 void opcionesCliente(int& totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente, DBConnector &dbconnector){
 	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores, cliente, dbconnector);
 }
-
+//Cunado acceda como profesor, llegará aqui y podrá elegir entre las opciones que tiene
 void opcionesProfesor(int &totalClientes, int totalProfesores, int totalVehiculos, int totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes, DBConnector &dbconnector){
 	enunciadoOpcionesProfesor( totalClientes,  totalProfesores, totalVehiculos, totalCitas, misProfesores,  misVehiculos,  misCitas, dbconnector);
 
