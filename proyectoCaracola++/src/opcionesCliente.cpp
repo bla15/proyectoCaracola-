@@ -98,15 +98,28 @@ void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes){
 	}
 }
 void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores, Vehiculo** misVehiculos ){
-	string dni;
+	int dni;
 	cout<<"En esta autoescuela hay los siguientes profesores: "<<endl;
 	for(int i=0;i<totalProfesores;i++){
 		cout<<misProfesores[i]->getNombre()<<" con DNI: "<<misProfesores[i]->getDni()<<endl;
+	}
+
 		cout<<"Introduce el DNI del profesor para la cita: "<<endl;
 		cin>>dni;
-	}
-}
+		if(comprobarDNI(totalProfesores, dni,misProfesores)==true){
+			cout<<"existe"<<endl;
+		}
 
+}
+bool comprobarDNI(int totalProfesores, int dni, Profesor** misProfesores){
+	int existe=false;
+	for(int i=0; i<totalProfesores;i++){
+		if(misProfesores[i]->getDni()==dni){
+			existe=true;
+		}
+	}
+	return existe;
+}
 void eliminarCliente(int *totalClientes, int * totalCitas, Clientes* misClientes){
 
 }

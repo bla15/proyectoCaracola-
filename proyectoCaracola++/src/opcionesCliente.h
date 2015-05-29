@@ -8,6 +8,6 @@ void verInforDelCliente(int totalClientes, int totalCitas, Clientes* misClientes
 void cambiarInformacion(Clientes* misClientes);
 void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes);
 void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes,  Profesor** misProfesores, Vehiculo** misVehiculos );
-bool comprobarDNI(int totalProfesores, int dni);
+bool comprobarDNI(int totalProfesores, int dni,  Profesor** misProfesores );
 void eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes);
 #endif
