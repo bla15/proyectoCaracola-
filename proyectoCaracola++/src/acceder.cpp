@@ -37,6 +37,7 @@ void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int
 	for(j=0; j < totalProfesores; j++){
 		if(misProfesores[j]->getDni() == dni){
 			cout << "Bienvenido//Egunon señor/señora:  "<<misProfesores[j]->getNombre()<< endl;
+			entrarProfesores(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores[j], misCitas, misVehiculos, misClientes);
 			bandera=1;
 		}
 	}
@@ -56,7 +57,23 @@ void entrarCliente(int totalClientes, int totalProfesores, int totalVehiculos, i
 	}
 }
 
+void entrarProfesores(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
+	string clave;
+		cout << "Introduzca su contraseña "<< endl;
+		cin  >> clave;
+		if(clave.compare(misProfesores->getClave()) == 0){
+			cout << "Contraseña CORRECTA"<< endl;
+			opcionesProfesor(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores, misCitas, misVehiculos, misClientes);
+		}else{//si es falsa la contraseña
+			cout << "Contraseña INCORRECTA"<< endl;
+		}
+}
+
 void opcionesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores){
 	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores);
+}
+
+void opcionesProfesor(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
+	enunciadoOpcionesProfesor(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores, misCitas, misVehiculos, misClientes);
 }
 

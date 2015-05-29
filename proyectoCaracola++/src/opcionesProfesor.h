@@ -3,7 +3,7 @@
 using namespace contenedorClientes;
 using namespace contenedorProfesor;
 
-void enunciadoOpcinesProfesor(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Profesor *misProfesores, Vehiculo * misVehiculos);
+void enunciadoOpcionesProfesor(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Profesor *misProfesores, Vehiculo * misVehiculos);
 void verInforDelProfesor(int totalProfesores, int totalVehiculos, Profesor * misProfesores, Vehiculo ** misVehiculos);
 void cambiarInformacion(Profesor * misProfesores);
 void cambiarInformacionMecanismo(int opcionDos, Profesor * misProfesores);

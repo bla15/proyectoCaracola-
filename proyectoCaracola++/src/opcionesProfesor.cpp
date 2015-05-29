@@ -9,7 +9,19 @@ using namespace std;//para el cout y endl
 using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
-void enunciadoOpcinesProfesor(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Profesor *misProfesores, Vehiculo * misVehiculos){
+
+void verInforDelProfesor(int totalProfesores, int totalCitas, Profesor* misProfesores, Cita** misCitas){
+	mostrarProfesoresDetallado(misProfesores);
+	for(int i=0;i<totalCitas;i++){
+		if(misCitas[i]->getDniProf()==misProfesores->getDni()()){
+		// Mostrar citas
+		}else{
+			cout<<"No hay citas para mostrar"<<endl;
+		}
+	}
+}
+
+void enunciadoOpcionesProfesor(int totalClientes, int totalProfesores, int totalVehiculos, int totalCitas, Profesor *misProfesores, Cita ** misCitas, Vehiculo **misVehiculos, Clientes **misClientes){
 	int opcion;
 	do{
 		cout<<endl;
@@ -33,16 +45,7 @@ void enunciadoOpcinesProfesor(int totalClientes, int totalProfesores, int totalV
 }while(opcion!=4);
 
 }
-void verInforDelProfesor(int totalProfesores, int totalCitas, Clientes* misClientes, Cita** misCitas){
-	mostrarProfesoresDetallado(misProfesores);
-	for(int i=0;i<totalVehiculos;i++){
-		if(misVehiculos[i]->getMatricula()==misProfesores->getMatricula()){
-			mostrarVehiculosDetallado(misVehiculos[i]);
-		}else{
-			cout<<"No hay vehiculos para mostrar"<<endl;
-		}
-	}
-}
+
 void cambiarInformacion(Profesor *misProfesores){
 	int opcionDos;
 	cout<<"Pulsa 1 para cambiar el nombre"<<endl;

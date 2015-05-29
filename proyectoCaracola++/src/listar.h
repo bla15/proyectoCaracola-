@@ -18,7 +18,7 @@ void mostrarCitas(int totalCitas, Cita** miscitas);
 void mostrarVehiculos(int totalVehiculos);
 
 void mostrarClienteDetallado(Clientes* misclientes);
-void mostrarProfeosresDetallado(Profesor* misProfesores);
+void mostrarProfesoresDetallado(Profesor* misProfesores);
 void mostrarCitasDetallado(Cita* miscitas);
 void mostrarVehiculosDetallado();
 #endif
