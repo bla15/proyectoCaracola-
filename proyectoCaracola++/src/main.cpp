@@ -134,7 +134,9 @@ int main() {
 	}while(opcion!=4);
 
 	dbconnector.deleteAllClientes();
+	dbconnector.deleteAllProfesores();
 	dbconnector.deleteAllVehiculos();
+	dbconnector.deleteAllCitas();
 	// modificado otra vez
 
 	return 0;
