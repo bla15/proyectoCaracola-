@@ -31,6 +31,7 @@ public:
 	int insertNewCliente(int dni, string nombre, string apellido, string clave, int telefono);
 	int insertNewProfesor(int dni, string nombre, string apellido, string clave, int telefono);
 	int insertNewVehiculo(int matricula, int antiguedad, string color);
+	int insertNewCita(int matricula, int dniCl, int dniProf);
 	DBConnector(string dbFile);
 	~DBConnector();
 };

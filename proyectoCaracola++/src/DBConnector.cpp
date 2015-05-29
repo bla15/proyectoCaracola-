@@ -182,7 +182,7 @@ int DBConnector::showAllVehiculos(){
 				if (result == SQLITE_ROW) {
 					matricula = sqlite3_column_int(stmt, 0);
 					antiguedad = sqlite3_column_int(stmt, 1);
-					strcpy(color, (char *)sqlite3_column_text(stmt, 3));
+					strcpy(color, (char *)sqlite3_column_text(stmt, 2));
 					printf("MATRICULA: %d ANTIGUEDAD: %d COLOR: %s\n", matricula, antiguedad, color);
 				}
 			} while (result == SQLITE_ROW);
@@ -372,7 +372,6 @@ int DBConnector::deleteAllVehiculos(){
 
 
 
-
 int DBConnector::insertNewCliente(int dni, string nombre, string apellido, string clave, int telefono) {
 	sqlite3_stmt *stmt;
 
@@ -558,6 +557,59 @@ int DBConnector::insertNewVehiculo(int matricula, int antiguedad, string color){
 		printf("Prepared statement finalized (INSERT)\n");
 
 		return SQLITE_OK;
+}
+
+int DBConnector::insertNewCita(int matricula, int dniCl, int dniProf){
+	sqlite3_stmt *stmt;
+
+			char sql[] = "insert into Citas (matricula, dniCl, dniProf) values (?, ?, ?)";
+			int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+			if (result != SQLITE_OK) {
+				printf("Error preparing statement (INSERT)\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
+
+			printf("SQL query prepared (INSERT)\n");
+
+			result = sqlite3_bind_int(stmt, 1, matricula); // Metemos matricula
+			if (result != SQLITE_OK) {
+					printf("Error binding parameters\n");
+					return result;
+				}
+
+
+			result = sqlite3_bind_int(stmt, 2, dniCl); // metemos antiguedad
+			if (result != SQLITE_OK) {
+				printf("Error binding parameters\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
+
+			result = sqlite3_bind_int(stmt, 3, dniProf); // metemos color
+			if (result != SQLITE_OK) {
+					printf("Error binding parameters\n");
+					printf("%s\n", sqlite3_errmsg(db));
+					return result;
+				}
+
+			result = sqlite3_step(stmt);
+			if (result != SQLITE_DONE) {
+				printf("Error inserting new data into vehiculo table\n");
+				printf("%d\n", result);
+				return result;
+			}
+
+			result = sqlite3_finalize(stmt);
+			if (result != SQLITE_OK) {
+				printf("Error finalizing statement (INSERT)\n");
+				printf("%s\n", sqlite3_errmsg(db));
+				return result;
+			}
+
+			printf("Prepared statement finalized (INSERT)\n");
+
+			return SQLITE_OK;
 }
 
 DBConnector::DBConnector(string dbFile) { // Aqui se abre la conexion

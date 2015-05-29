@@ -74,7 +74,9 @@ int main() {
 	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");
 
 	inicializarVehiculo(misVehiculos, dbconnector);
-	// dbconnector.showAllVehiculos();
+	dbconnector.showAllVehiculos();
+	dbconnector.showAllClientes();
+
 
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
