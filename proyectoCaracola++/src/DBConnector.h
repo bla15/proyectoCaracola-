@@ -24,6 +24,7 @@ public:
 	int showAllCitas();
 	int showAllVehiculos();
 	int deleteCliente(int dni);
+	int deleteAllClientes();
 	int deleteAllProfesores();
 	int deleteAllCitas();
 	int deleteAllVehiculos();

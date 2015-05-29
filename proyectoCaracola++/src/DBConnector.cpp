@@ -155,7 +155,7 @@ int DBConnector::showAllCitas(){
 		return SQLITE_OK;
 }
 
-int DBConnector::showAllVehiculos(){ // NO SE SI OCURRIRA ALGUN PROBLEMA POR EL TEMA DE LA HERENCIA
+int DBConnector::showAllVehiculos(){
 	sqlite3_stmt *stmt; // Statement
 
 			char sql[] = "select matricula, antiguedad, color from Vehiculos"; // El SELECT
@@ -207,7 +207,7 @@ int DBConnector::deleteCliente(int dni) { // No nos interesa eliminar todos los 
 
 	char sql[] = "delete * from Clientes where dni = ?";
 
-	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ; // No se si es -1 o strlen(sql) + 1
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
@@ -236,8 +236,41 @@ int DBConnector::deleteCliente(int dni) { // No nos interesa eliminar todos los 
 
 	return SQLITE_OK;
 }
-/*
- * No creo que nos hagan falta estos deletes
+
+int DBConnector::deleteAllClientes(){
+	sqlite3_stmt *stmt;
+
+		char sql[] = "delete from Clientes";
+
+		int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (DELETE)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("SQL query prepared (DELETE)\n");
+
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			printf("Error deleting data\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_finalize(stmt);
+		if (result != SQLITE_OK) {
+			printf("Error finalizing statement (DELETE)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("Prepared statement finalized (DELETE)\n");
+
+		return SQLITE_OK;
+}
+
+
 int DBConnector::deleteAllProfesores(){
 	sqlite3_stmt *stmt;
 
@@ -336,9 +369,9 @@ int DBConnector::deleteAllVehiculos(){
 
 		return SQLITE_OK;
 }
-*/
 
-// FALTA HACER LOS INSERTS
+
+
 
 int DBConnector::insertNewCliente(int dni, string nombre, string apellido, string clave, int telefono) {
 	sqlite3_stmt *stmt;
