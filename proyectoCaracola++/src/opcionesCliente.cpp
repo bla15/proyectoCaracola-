@@ -26,6 +26,9 @@ void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVe
 			cambiarInformacion(misClientes);
 			break;
 		case 3://para pedir una cita
+			if(totalCitas<5){
+				cout<<"El array de citas esta lleno"<<endl;
+			}
 			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misProfesores, misVehiculos);
 			break;
 		case 4://para eliminar este cliente
@@ -99,26 +102,58 @@ void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes){
 }
 void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores, Vehiculo** misVehiculos ){
 	int dni;
+	int matricula;
 	cout<<"En esta autoescuela hay los siguientes profesores: "<<endl;
 	for(int i=0;i<totalProfesores;i++){
 		cout<<misProfesores[i]->getNombre()<<" con DNI: "<<misProfesores[i]->getDni()<<endl;
 	}
 
-		cout<<"Introduce el DNI del profesor para la cita: "<<endl;
-		cin>>dni;
-		if(comprobarDNI(totalProfesores, dni,misProfesores)==true){
-			cout<<"existe"<<endl;
+	cout<<"Introduce el DNI del profesor para la cita: "<<endl;
+	cin>>dni;
+	if(comprobarDNI(totalProfesores, dni,misProfesores)==true){
+		cout<<"En esta autoescuela tenemos estos vehiculos: "<<endl;
+		for(int i=0;i<totalVehiculos;i++){
+			cout<<"Vehiculo: "<<i<<"º"<<endl;
+			cout<<"\tCon matricula: "<<misVehiculos[i]->getMatricula()<<endl;
+			cout<<"\tCon antiguedad en años: "<<misVehiculos[i]->getAntiguedad()<<endl;
 		}
+		cout<<"Elige un vehiculo, introduciendo su matricula"<<endl;
+		cin>>matricula;
+		if(comprobarMatricula(totalVehiculos, matricula, misVehiculos)==true){
+			cout<<"BIENNNNNNNNNN"<<endl;
+		}else{
+			cout<<"No existe esa matricula"<<endl;
+		}
+	}else{
+		cout<<"No existe un profesor con ese dni"<<endl;
+	}
 
 }
 bool comprobarDNI(int totalProfesores, int dni, Profesor** misProfesores){
 	int existe=false;
+
 	for(int i=0; i<totalProfesores;i++){
+
 		if(misProfesores[i]->getDni()==dni){
 			existe=true;
 		}
 	}
+
 	return existe;
+}
+bool comprobarMatricula(int totalVehiculo, int matricula, Vehiculo** misVehiculos){
+	int existe=false;
+	for(int i=0; i<totalVehiculo;i++){
+
+		if(misVehiculos[i]->getMatricula()==matricula){
+			existe=true;
+
+		}
+	}
+	return existe;
+}
+void crearCitas(int totalCitas, Cita** miscitas, int dni, int matricula){
+
 }
 void eliminarCliente(int *totalClientes, int * totalCitas, Clientes* misClientes){
 
