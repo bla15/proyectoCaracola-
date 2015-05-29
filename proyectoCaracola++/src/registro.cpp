@@ -4,6 +4,7 @@
 #include <string.h>
 #include "clientes.h"
 #include "profesor.h"
+#include "DBConnector.h"
 using namespace std;
 using namespace contenedorClientes;
 using namespace contenedorProfesor;
@@ -20,7 +21,7 @@ int enunciadoInicioII(){
 	return num;
 }
 
-void registroClientes(Clientes ** misClientes, int totalClientes){
+void registroClientes(Clientes ** misClientes, int totalClientes, DBConnector &dbconnector){
 	string nombre;
 	string apellido;
 	string clave;
@@ -42,11 +43,12 @@ void registroClientes(Clientes ** misClientes, int totalClientes){
 
 	//guardamos los datos del nuevo cliente
 	misClientes[totalClientes] = new Clientes(nombre,apellido, clave, dni, telefono);
+	dbconnector.insertNewCliente(dni, nombre, apellido, clave, telefono);
 
 
 }
 
-void registroProfesores(Profesor ** misProfesores, int totalProfesores){
+void registroProfesores(Profesor ** misProfesores, int totalProfesores, DBConnector &dbconnector){
 	string nombre;
 	string apellido;
 	string clave;
@@ -68,6 +70,7 @@ void registroProfesores(Profesor ** misProfesores, int totalProfesores){
 
 	//guardamos los datos del nuevo cliente
 	misProfesores[totalProfesores]= new Profesor(nombre,apellido, clave, dni, telefono);
+	dbconnector.insertNewProfesor(dni, nombre, apellido, clave, telefono);
 
 }
 

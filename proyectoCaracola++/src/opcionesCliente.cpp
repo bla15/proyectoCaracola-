@@ -9,9 +9,9 @@ using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
 
-void enunciadoOpcinesCliente(int &totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor** misProfesores, Clientes** cliente){
+void enunciadoOpcinesCliente(int &totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor** misProfesores, Clientes** cliente, DBConnector &dbconnector){
 	int opcion;
-	bool bandera;
+
 	do{
 		cout<<endl;
 		cout<<"Pulsa 1 para ver tus datos de forma detallada"<<endl;
@@ -25,7 +25,7 @@ void enunciadoOpcinesCliente(int &totalClientes, int totalProfesores, int totalV
 			verInforDelCliente(totalClientes, totalCitas, misClientes,misCitas);
 			break;
 		case 2://para cambiar los datos del cliente
-			cambiarInformacion(misClientes);
+			cambiarInformacion(misClientes, dbconnector);
 			break;
 		case 3://para pedir una cita
 			if(totalCitas<5){
@@ -33,10 +33,10 @@ void enunciadoOpcinesCliente(int &totalClientes, int totalProfesores, int totalV
 			}else{
 				cout<<"El array de citas esta lleno"<<endl;
 			}
-			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misProfesores,misCitas, misVehiculos);
+			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misProfesores,misCitas, misVehiculos, dbconnector);
 			break;
 		case 4://para eliminar este cliente
-			opcion=eliminarCliente(totalClientes, totalCitas, misClientes, misCitas, cliente);
+			opcion=eliminarCliente(totalClientes, totalCitas, misClientes, misCitas, cliente, dbconnector);
 
 			break;
 	}
@@ -56,33 +56,33 @@ void verInforDelCliente(int& totalClientes, int totalCitas, Clientes* misCliente
 		}
 	}
 }
-void cambiarInformacion(Clientes* misClientes){
+void cambiarInformacion(Clientes* misClientes, DBConnector &dbconnector){
 	int opcionDos;
 	cout<<"Pulsa 1 para cambiar el nombre"<<endl;
 	cout<<"Pulsa 2 para cambiar el apellido"<<endl;
 	cout<<"Pulsa 3 para cambiar la clave"<<endl;
-	cout<<"Pulsa 4 para cambiar el DNI"<<endl;
-	cout<<"Pulsa 5 para cambiar el telefonpo"<<endl;
-	cout<<"Pulsa 6 para salir"<<endl;
+	cout<<"Pulsa 4 para cambiar el telefonpo"<<endl;
+	cout<<"Pulsa 5 para salir"<<endl;
 	cin>>opcionDos;
-	cambiarInformacionMecanismo(opcionDos, misClientes);
+	cambiarInformacionMecanismo(opcionDos, misClientes, dbconnector);
 }
-void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes){
+void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes, DBConnector &dbconnector){
 	string nombre;
 	string apellido;
 	string clave;
 	int telefono;
-	int DNI;
 	switch(opcionDos){
 	case 1:
 		cout<<"introduzca se nuevo nombre"<<endl;
 		cin>>nombre;
 		misClientes->setNombre(nombre);
+		dbconnector.updateClienteString(misClientes->getDni(), "nombre", nombre);
 		break;
 	case 2:
 		cout<<"introduzca se nuevo apellido"<<endl;
 		cin>>apellido;
 		misClientes->setApellido(apellido);
+		dbconnector.updateClienteString(misClientes->getDni(), "apellido", apellido);
 		break;
 	case 3:
 		cout<<"introduzca su vieja clave"<<endl;
@@ -91,22 +91,19 @@ void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes){
 			cout<<"introduzca su clave nueva"<<endl;
 			cin>>clave;
 			misClientes->setClave(clave);
+			dbconnector.updateClienteString(misClientes->getDni(), "clave", clave);
 		}
 		break;
 	case 4:
-		cout<<"introduzca se nuevo DNI"<<endl;
-		cin>>DNI;
-		misClientes->setDni(DNI);
-		break;
-	case 5:
-		cout<<"introduzca se nuevo telefono"<<endl;
+		cout<<"introduzca su nuevo telefono"<<endl;
 		cin>>telefono;
 		misClientes->setTelefono(telefono);
+		dbconnector.updateClienteInt(misClientes->getDni(), "telefono", telefono);
 		break;
 
 	}
 }
-void pedirCita(int &totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores,  Cita** misCitas, Vehiculo** misVehiculos ){
+void pedirCita(int &totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores,  Cita** misCitas, Vehiculo** misVehiculos, DBConnector &dbconnector){
 	int dni;
 	int matricula;
 	cout<<"En esta autoescuela hay los siguientes profesores: "<<endl;
@@ -118,15 +115,11 @@ void pedirCita(int &totalClientes, int totalProfesores, int totalVehiculos, int 
 	cin>>dni;
 	if(comprobarDNI(totalProfesores, dni,misProfesores)==true){
 		cout<<"En esta autoescuela tenemos estos vehiculos: "<<endl;
-		for(int i=0;i<totalVehiculos;i++){
-			cout<<"Vehiculo: "<<i<<"º"<<endl;
-			cout<<"\tCon matricula: "<<misVehiculos[i]->getMatricula()<<endl;
-			cout<<"\tCon antiguedad en años: "<<misVehiculos[i]->getAntiguedad()<<endl;
-		}
+		mostrarVehiculos(totalVehiculos, dbconnector);
 		cout<<"Elige un vehiculo, introduciendo su matricula"<<endl;
 		cin>>matricula;
 		if(comprobarMatricula(totalVehiculos, matricula, misVehiculos)==true){
-			crearCitas(totalCitas, misCitas, dni, matricula, misClientes);
+			crearCitas(totalCitas, misCitas, dni, matricula, misClientes, dbconnector);
 		}else{
 			cout<<"No existe esa matricula"<<endl;
 		}
@@ -157,12 +150,13 @@ bool comprobarMatricula(int totalVehiculo, int matricula, Vehiculo** misVehiculo
 	}
 	return existe;
 }
-void crearCitas(int& totalCitas, Cita** miscitas, int dniProfesor, int matricula, Clientes* misClientes){
+void crearCitas(int& totalCitas, Cita** miscitas, int dniProfesor, int matricula, Clientes* misClientes, DBConnector &dbconnector){
 	miscitas[totalCitas]=new Cita(matricula, misClientes->getDni(),dniProfesor);
 	totalCitas++;
+	dbconnector.insertNewCita(matricula, misClientes->getDni(), dniProfesor);
 	cout<<"Cita creada"<<endl;
 }
-int eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes,  Cita** misCitas, Clientes** cliente){
+int eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes,  Cita** misCitas, Clientes** cliente, DBConnector &dbconnector){
 	int bandera=4;
 	int seguro;
 	int totalcit=totalCitas;
@@ -170,11 +164,13 @@ int eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes, 
 	cout<<"vas a eliminarte de la lista, pulsa 1 si es correcto o otro numero si deseas salir"<<endl;
 	cin>>seguro;
 	if(seguro==1){
+
 		//hacemos una copia del cliente en cuestion
 		Clientes* temCliente = misClientes;
 
 		//primero borramos las citas asociadas a ese cliente
 		if(totalcit>1){
+			dbconnector.deleteCita(misClientes->getDni());
 			for(int z=0;z<totalcit;z++){
 				if(misClientes->getDni()==misCitas[z]->getDniCl()){
 
@@ -192,6 +188,7 @@ int eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes, 
 		}
 
 		//ahora se borra el cliente en cuestion ya que no hay ninguna cita asociada a el
+		dbconnector.deleteCliente(misClientes->getDni());
 		if(totalClie>1){
 			for(int z=totalClie+1;z< totalClie;z++){//for que corre la lista de los clientes
 				cliente[z-1]->clonado(cliente[z]);
@@ -200,7 +197,7 @@ int eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes, 
 		}else{
 			delete misClientes;
 			totalClientes--;
-			cout<<totalClientes<<endl;
+
 		}
 		bandera=5;
 	}else{

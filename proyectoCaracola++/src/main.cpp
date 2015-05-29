@@ -23,7 +23,7 @@ using namespace contenedorVehiculos;
 #define MAX_VEHICULOS 9
 
 
-void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector &dbconnector){
+void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector &dbconnector){ // Inicializacion de los vehiculos e inserción de los mismos en la BD
 
 	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");
 	dbconnector.insertNewVehiculo(misVehiculos[0]->getMatricula(), misVehiculos[0]->getAntiguedad(), misVehiculos[0]->getColor());
@@ -46,7 +46,7 @@ void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector &dbconnector){
 
 }
 
-int main() {
+int main() { //
 
 	int opcion = 0;
 	int opcion2 = 0;
@@ -59,27 +59,15 @@ int main() {
 	DBConnector dbconnector("Karakola.sqlite");
 
 	Clientes **misClientes=new Clientes*[MAX_CLIENTES];
-	misClientes[0]= new Clientes("PEPE", "García", "1",1,1);
-	totalClientes++;
-	dbconnector.insertNewCliente(misClientes[0]->getDni(), misClientes[0]->getNombre(), misClientes[0]->getApellido(), misClientes[0]->getClave(), misClientes[0]->getTelefono());
 
 	Profesor **misProfesores=new Profesor* [MAX_PROFESORES];
-	misProfesores[0]= new Profesor("Ana", "García", "2",2,2);
-	totalProfesores++;
+
 
 	Cita **misCitas=new Cita*[MAX_CITAS];
-	misCitas[0]=new Cita(1822, 1,2);
-	totalCitas++;
-	misCitas[1]=new Cita(5972, 1,2);
-	totalCitas++;
 
 	Vehiculo ** misVehiculos = new Vehiculo * [MAX_VEHICULOS];
-	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");
 
 	inicializarVehiculo(misVehiculos, dbconnector);
-	dbconnector.showAllVehiculos();
-	dbconnector.showAllClientes();
-
 
 
 	cout << "Bienvenido a la autoescuela Caracola!!!" << endl;
@@ -95,7 +83,7 @@ int main() {
 				switch(opcion2){
 				case 1://registro de clientes
 					if(totalClientes<MAX_CLIENTES){
-						registroClientes(misClientes,totalClientes);
+						registroClientes(misClientes,totalClientes, dbconnector);
 						totalClientes++;
 					}else{
 						cout << "La lista clientes esta llena" << endl;
@@ -104,7 +92,7 @@ int main() {
 					break;
 				case 2://registro de profesores
 					if(totalProfesores<MAX_PROFESORES){
-						registroProfesores(misProfesores, totalProfesores);
+						registroProfesores(misProfesores, totalProfesores, dbconnector);
 						totalProfesores++;
 					}else{
 						cout << "La lista profesores esta llena" << endl;
@@ -116,18 +104,18 @@ int main() {
 				break;
 				case 2://para listar el contenido
 					if(totalClientes+totalProfesores==0){//si no hy elementos en la BD no se puede mostrar nada
-						cout<<"no hay datos guardados en la base de datos"<<endl;
+						cout<<"No hay datos guardados en la base de datos"<<endl;
 					}else{
-						enunciadoIII(totalClientes, totalProfesores, totalCitas, totalVehiculos, misClientes, misProfesores, misCitas);
+						enunciadoIII(totalClientes, totalProfesores, totalCitas, totalVehiculos, misClientes, misProfesores, misCitas, dbconnector);
 					}
 
 
 					break;
 				case 3://para acceder
 					if(totalClientes+totalProfesores!=0){
-						cout<<totalClientes<<endl;
+
 						int dni=enunciadoInicioIV();
-						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores, misCitas, misVehiculos);
+						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores, misCitas, misVehiculos, dbconnector);
 
 					}else{
 						cout << "No hay ningun cliente o profesor registrado" << endl;
@@ -139,7 +127,24 @@ int main() {
 	dbconnector.deleteAllProfesores();
 	dbconnector.deleteAllVehiculos();
 	dbconnector.deleteAllCitas();
-	// modificado otra vez
+	for (int i = 0; i < totalClientes; i++){
+		delete misClientes[i];
+	}
+	delete [] misClientes;
+	for (int i = 0; i < totalProfesores; i++){
+			delete misProfesores[i];
+		}
+	delete [] misProfesores;
+	for (int i = 0; i < totalCitas; i++){
+			delete misCitas[i];
+		}
+	delete [] misCitas;
+	for (int i = 0; i < totalVehiculos; i++){
+			delete misVehiculos[i];
+		}
+	delete [] misVehiculos;
+
+
 
 	return 0;
 }

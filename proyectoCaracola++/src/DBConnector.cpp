@@ -39,7 +39,7 @@ int DBConnector::showAllClientes() {
 			strcpy(apellido, (char *) sqlite3_column_text(stmt, 2));
 			strcpy(clave, (char *) sqlite3_column_text(stmt, 3));
 			telefono = sqlite3_column_int(stmt, 4);
-			printf("DNI: %d Nombre: %s Apellido: %s Clave: %s Telefono: %d\n", dni, nombre, apellido, clave, telefono);
+			printf("DNI: %d Nombre: %s\n", dni, nombre);
 		}
 	} while (result == SQLITE_ROW);
 
@@ -89,7 +89,7 @@ int DBConnector::showAllProfesores(){
 				strcpy(apellido, (char *) sqlite3_column_text(stmt, 2));
 				strcpy(clave, (char *) sqlite3_column_text(stmt, 3));
 				telefono = sqlite3_column_int(stmt, 4);
-				printf("DNI: %d Nombre: %s Apellido: %s Clave: %s Telefono: %d\n", dni, nombre, apellido, clave, telefono);
+				printf("DNI: %d Nombre: %s\n", dni, nombre);
 			}
 		} while (result == SQLITE_ROW);
 
@@ -183,7 +183,7 @@ int DBConnector::showAllVehiculos(){
 					matricula = sqlite3_column_int(stmt, 0);
 					antiguedad = sqlite3_column_int(stmt, 1);
 					strcpy(color, (char *)sqlite3_column_text(stmt, 2));
-					printf("MATRICULA: %d ANTIGUEDAD: %d COLOR: %s\n", matricula, antiguedad, color);
+					printf("MATRICULA: %d\n", matricula);
 				}
 			} while (result == SQLITE_ROW);
 
@@ -202,10 +202,10 @@ int DBConnector::showAllVehiculos(){
 			return SQLITE_OK;
 }
 
-int DBConnector::deleteCliente(int dni) { // No nos interesa eliminar todos los clientes, solo uno
+int DBConnector::deleteCliente(int dni) {
 	sqlite3_stmt *stmt;
 
-	char sql[] = "delete * from Clientes where dni = ?";
+	char sql[] = "delete from Clientes where dni = ?";
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -217,6 +217,41 @@ int DBConnector::deleteCliente(int dni) { // No nos interesa eliminar todos los 
 	printf("SQL query prepared (DELETE)\n");
 
 	result = sqlite3_bind_int(stmt, 1, dni);
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
+
+	return SQLITE_OK;
+}
+
+int DBConnector::deleteCita(int dniCl) {
+	sqlite3_stmt *stmt;
+
+	char sql[] = "delete from Citas where dniCl = ?";
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_bind_int(stmt, 1, dniCl);
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
@@ -610,6 +645,114 @@ int DBConnector::insertNewCita(int matricula, int dniCl, int dniProf){
 			printf("Prepared statement finalized (INSERT)\n");
 
 			return SQLITE_OK;
+}
+
+int DBConnector::updateClienteString(int key, string col, string newValue){ // En este caso, falta revisar la consulta, ya que no funciona de esta manera
+	sqlite3_stmt * stmt;
+
+		char sql[] = "update Clientes set ? = ? where dni = ?";
+		int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("SQL query prepared (INSERT)\n");
+
+		result = sqlite3_bind_text(stmt, 1, col.c_str(), col.length(), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_bind_text(stmt, 2, newValue.c_str(), newValue.length(), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_bind_int(stmt, 3, key);
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			printf("Error inserting new data into vehiculo table\n");
+			printf("%d\n", result);
+			return result;
+		}
+
+		result = sqlite3_finalize(stmt);
+		if (result != SQLITE_OK) {
+			printf("Error finalizing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("Prepared statement finalized (INSERT)\n");
+
+		return SQLITE_OK;
+
+}
+
+int DBConnector::updateClienteInt(int key, string col, int newValue){
+	sqlite3_stmt * stmt;
+
+		char sql[] = "update Clientes set ? = ? where dni = ?";
+		int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("SQL query prepared (INSERT)\n");
+
+		result = sqlite3_bind_text(stmt, 1, col.c_str(), col.length(), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_bind_int(stmt, 2, newValue);
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_bind_int(stmt, 3, key);
+		if (result != SQLITE_OK) {
+			printf("Error binding parameters\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			printf("Error inserting new data into vehiculo table\n");
+			printf("%d\n", result);
+			return result;
+		}
+
+		result = sqlite3_finalize(stmt);
+		if (result != SQLITE_OK) {
+			printf("Error finalizing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+
+		printf("Prepared statement finalized (INSERT)\n");
+
+		return SQLITE_OK;
+
 }
 
 DBConnector::DBConnector(string dbFile) { // Aqui se abre la conexion

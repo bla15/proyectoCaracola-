@@ -24,6 +24,7 @@ public:
 	int showAllCitas();
 	int showAllVehiculos();
 	int deleteCliente(int dni);
+	int deleteCita(int dniCl);
 	int deleteAllClientes();
 	int deleteAllProfesores();
 	int deleteAllCitas();
@@ -32,6 +33,8 @@ public:
 	int insertNewProfesor(int dni, string nombre, string apellido, string clave, int telefono);
 	int insertNewVehiculo(int matricula, int antiguedad, string color);
 	int insertNewCita(int matricula, int dniCl, int dniProf);
+	int updateClienteString(int key, string col, string newValue);
+	int updateClienteInt(int key, string col, int newValue);
 	DBConnector(string dbFile);
 	~DBConnector();
 };

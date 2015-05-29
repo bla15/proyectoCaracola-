@@ -4,7 +4,7 @@ using namespace contenedorClientes;
 using namespace contenedorProfesor;
 
 int enunciadoInicioII();
-void registroClientes(Clientes ** misClientes, int totalClientes);
-void registroProfesores(Profesor ** misProfesores, int totalProfesores);
+void registroClientes(Clientes ** misClientes, int totalClientes, DBConnector &dbconnector);
+void registroProfesores(Profesor ** misProfesores, int totalProfesores, DBConnector &dbconnector);
 
 #endif

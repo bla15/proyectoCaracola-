@@ -24,21 +24,21 @@ int enunciadoInicioIV(){
 		return num;
 }
 
-void comprobarCP(int &totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores, Cita** misCitas, Vehiculo** misVehiculos){
+void comprobarCP(int &totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores, Cita** misCitas, Vehiculo** misVehiculos, DBConnector &dbconnector){
 	int i=0;
 	int j=0;
 	int bandera=0;
 	for(i=0; i < totalClientes; i++){
 		if(misClientes[i]->getDni() == dni){
 			cout << "Bienvenido//Egunon señor/señora:  "<<misClientes[i]->getNombre()<< endl;
-			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas, misVehiculos, misProfesores, misClientes);
+			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas, misVehiculos, misProfesores, misClientes, dbconnector);
 			bandera=1;
 		}
 	}
 	for(j=0; j < totalProfesores; j++){
 		if(misProfesores[j]->getDni() == dni){
 			cout << "Bienvenido//Egunon señor/señora:  "<<misProfesores[j]->getNombre()<< endl;
-			entrarProfesores(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores[j], misCitas, misVehiculos, misClientes);
+			entrarProfesores(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores[j], misCitas, misVehiculos, misClientes, dbconnector);
 			bandera=1;
 		}
 	}
@@ -46,36 +46,36 @@ void comprobarCP(int &totalClientes, int totalProfesores, int totalVehiculos, in
 		cout<<"No se ha encontrado ninguna coincidencia"<<endl;
 	}
 }
-void entrarCliente(int &totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente){
+void entrarCliente(int &totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente, DBConnector &dbconnector){
 	string clave;
 	cout << "Introduzca su contraseña "<< endl;
 	cin  >> clave;
 	if(clave.compare(misClientes->getClave()) == 0){
 		cout << "Contraseña CORRECTA"<< endl;
-		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores, cliente);
+		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores, cliente, dbconnector);
 	}else{//si es falsa la contraseña
 		cout << "Contraseña INCORRECTA"<< endl;
 	}
 }
 
-void entrarProfesores(int& totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
+void entrarProfesores(int& totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes, DBConnector &dbconnector){
 	string clave;
 		cout << "Introduzca su contraseña "<< endl;
 		cin  >> clave;
 		if(clave.compare(misProfesores->getClave()) == 0){
 			cout << "Contraseña CORRECTA"<< endl;
-			opcionesProfesor(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores, misCitas, misVehiculos, misClientes);
+			opcionesProfesor(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores, misCitas, misVehiculos, misClientes, dbconnector);
 		}else{//si es falsa la contraseña
 			cout << "Contraseña INCORRECTA"<< endl;
 		}
 }
 
-void opcionesCliente(int& totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente){
-	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores, cliente);
+void opcionesCliente(int& totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente, DBConnector &dbconnector){
+	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores, cliente, dbconnector);
 }
 
-void opcionesProfesor(int &totalClientes, int totalProfesores, int totalVehiculos, int totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
-	enunciadoOpcionesProfesor( totalClientes,  totalProfesores, totalVehiculos, totalCitas, misProfesores,  misVehiculos,  misCitas);
+void opcionesProfesor(int &totalClientes, int totalProfesores, int totalVehiculos, int totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes, DBConnector &dbconnector){
+	enunciadoOpcionesProfesor( totalClientes,  totalProfesores, totalVehiculos, totalCitas, misProfesores,  misVehiculos,  misCitas, dbconnector);
 
 
 }
