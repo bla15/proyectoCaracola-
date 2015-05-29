@@ -22,6 +22,7 @@ using namespace contenedorVehiculos;
 #define MAX_CITAS 25
 #define MAX_VEHICULOS 9
 
+
 void inicializarVehiculo(Vehiculo ** misVehiculos, DBConnector &dbconnector){
 
 	misVehiculos[0] = new Coche(1822, 15, "Plateado", "Delantera");
@@ -68,6 +69,8 @@ int main() {
 
 	Cita **misCitas=new Cita*[MAX_CITAS];
 	misCitas[0]=new Cita(1822, 1,2);
+	totalCitas++;
+	misCitas[1]=new Cita(5972, 1,2);
 	totalCitas++;
 
 	Vehiculo ** misVehiculos = new Vehiculo * [MAX_VEHICULOS];
@@ -122,17 +125,16 @@ int main() {
 					break;
 				case 3://para acceder
 					if(totalClientes+totalProfesores!=0){
+						cout<<totalClientes<<endl;
 						int dni=enunciadoInicioIV();
 						comprobarCP(totalClientes, totalProfesores, totalVehiculos, dni, totalCitas, misClientes, misProfesores, misCitas, misVehiculos);
 
 					}else{
 						cout << "No hay ningun cliente o profesor registrado" << endl;
 					}
-					break;
+				break;
 		}
-
 	}while(opcion!=4);
-
 	dbconnector.deleteAllClientes();
 	dbconnector.deleteAllProfesores();
 	dbconnector.deleteAllVehiculos();

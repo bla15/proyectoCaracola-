@@ -15,6 +15,8 @@ public:
 	int getMatricula()const;
 	int getDniCl() const;
 	int getDniProf() const;
+	void borradoGeneral();
+	void clonado( Cita* c);
 };
 }
 #endif

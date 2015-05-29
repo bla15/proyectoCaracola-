@@ -50,4 +50,11 @@ int Clientes::getDni()const{
 int Clientes::getTelefono()const{
 	return this->telefono;
 }
+void Clientes::clonado(Clientes* c){
+this->apellido=c->getApellido();
+this->clave=c->getClave();
+this->dni=c->getDni();
+this->nombre=c->getNombre();
+this->telefono=c->getTelefono();
+}
 }

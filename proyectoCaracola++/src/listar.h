@@ -20,5 +20,5 @@ void mostrarVehiculos(int totalVehiculos);
 void mostrarClienteDetallado(Clientes* misclientes);
 void mostrarProfesoresDetallado(Profesor* misProfesores);
 void mostrarCitasDetallado(Cita* miscitas);
-void mostrarVehiculosDetallado();
+void mostrarVehiculosDetallado(int totalVehiculos, Vehiculo** misvehiculos);
 #endif

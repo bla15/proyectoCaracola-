@@ -13,7 +13,7 @@ using namespace contenedorCitas;
 void verInforDelProfesor(int totalProfesores, int totalCitas, Profesor* misProfesores, Cita** misCitas){
 	mostrarProfesoresDetallado(misProfesores);
 	for(int i=0;i<totalCitas;i++){
-		if(misCitas[i]->getDniProf()==misProfesores->getDni()()){
+		if(misCitas[i]->getDniProf()==misProfesores->getDni()){
 		// Mostrar citas
 		}else{
 			cout<<"No hay citas para mostrar"<<endl;
@@ -21,7 +21,7 @@ void verInforDelProfesor(int totalProfesores, int totalCitas, Profesor* misProfe
 	}
 }
 
-void enunciadoOpcionesProfesor(int totalClientes, int totalProfesores, int totalVehiculos, int totalCitas, Profesor *misProfesores, Cita ** misCitas, Vehiculo **misVehiculos, Clientes **misClientes){
+void  enunciadoOpcionesProfesor(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Profesor *misProfesores, Vehiculo ** misVehiculos,  Cita **misCitas){
 	int opcion;
 	do{
 		cout<<endl;
@@ -32,13 +32,13 @@ void enunciadoOpcionesProfesor(int totalClientes, int totalProfesores, int total
 		cin>>opcion;
 		switch(opcion){
 		case 1://para ver los datos
-			verInforDelProfesor(totalProfesores, totalVehiculos, misProfesores, misVehiculos);
+			verInforDelProfesor( totalProfesores,  totalCitas,  misProfesores, misCitas);
 			break;
 		case 2://para cambiar los datos del profesorr
 			cambiarInformacion(misProfesores);
 			break;
 		case 3://para ver los vehiculos
-			verVehiculos(totalProfesores, totalVehiculos,misProfesores, misVehiculos);
+			mostrarVehiculosDetallado(totalVehiculos, misVehiculos);
 			break;
 
 	}
@@ -96,14 +96,5 @@ void cambiarInformacionMecanismo(int opcionDos, Profesor *misProfesores){
 
 	}
 }
-void verVehiculos(int totalProfesores, int totalVehiculos, Profesor *misProfesores, Vehiculo **misVehiculos){
-	mostrarVehiculoDetallado(misVehiculos);
-	for(int i=0;i<totalVehiculos;i++){
-		if(misVehiculos[i]->getMatricula()==misProfesores->getMatricula()){
-			mostrarVehiculosDetallado(misVehiculos[i]);
-		}else{
-			cout<<"No hay vehiculos para mostrar"<<endl;
-		}
-	}
-}
+
 

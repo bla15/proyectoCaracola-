@@ -6,6 +6,7 @@
 #include "citas.h"
 #include "acceder.h"
 #include "opcionesCliente.h"//para poder llamar a sus metodos
+#include "opcionesProfesor.h"//para poder llamar a sus metodos
 #include "listar.h"
 #include <string>//para poder usar strings
 #include <iostream>//para poder usar string
@@ -23,14 +24,14 @@ int enunciadoInicioIV(){
 		return num;
 }
 
-void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores, Cita** misCitas, Vehiculo** misVehiculos){
+void comprobarCP(int &totalClientes, int totalProfesores, int totalVehiculos, int dni, int & totalCitas, Clientes ** misClientes, Profesor * *misProfesores, Cita** misCitas, Vehiculo** misVehiculos){
 	int i=0;
 	int j=0;
 	int bandera=0;
 	for(i=0; i < totalClientes; i++){
 		if(misClientes[i]->getDni() == dni){
 			cout << "Bienvenido//Egunon señor/señora:  "<<misClientes[i]->getNombre()<< endl;
-			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas, misVehiculos, misProfesores);
+			entrarCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes[i],  misCitas, misVehiculos, misProfesores, misClientes);
 			bandera=1;
 		}
 	}
@@ -45,19 +46,19 @@ void comprobarCP(int totalClientes, int totalProfesores, int totalVehiculos, int
 		cout<<"No se ha encontrado ninguna coincidencia"<<endl;
 	}
 }
-void entrarCliente(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores){
+void entrarCliente(int &totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas,  Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente){
 	string clave;
 	cout << "Introduzca su contraseña "<< endl;
 	cin  >> clave;
 	if(clave.compare(misClientes->getClave()) == 0){
 		cout << "Contraseña CORRECTA"<< endl;
-		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores);
+		opcionesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores, cliente);
 	}else{//si es falsa la contraseña
 		cout << "Contraseña INCORRECTA"<< endl;
 	}
 }
 
-void entrarProfesores(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
+void entrarProfesores(int& totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
 	string clave;
 		cout << "Introduzca su contraseña "<< endl;
 		cin  >> clave;
@@ -69,11 +70,13 @@ void entrarProfesores(int totalClientes, int totalProfesores, int totalVehiculos
 		}
 }
 
-void opcionesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores){
-	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores);
+void opcionesCliente(int& totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor * *misProfesores, Clientes** cliente){
+	enunciadoOpcinesCliente(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misCitas, misVehiculos, misProfesores, cliente);
 }
 
-void opcionesProfesor(int totalClientes, int totalProfesores, int totalVehiculos, int &totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
-	enunciadoOpcionesProfesor(totalClientes, totalProfesores, totalVehiculos, totalCitas, misProfesores, misCitas, misVehiculos, misClientes);
+void opcionesProfesor(int &totalClientes, int totalProfesores, int totalVehiculos, int totalCitas, Profesor * misProfesores, Cita**misCitas, Vehiculo **misVehiculos, Clientes** misClientes){
+	enunciadoOpcionesProfesor( totalClientes,  totalProfesores, totalVehiculos, totalCitas, misProfesores,  misVehiculos,  misCitas);
+
+
 }
 

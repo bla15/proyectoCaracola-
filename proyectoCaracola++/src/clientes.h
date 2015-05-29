@@ -30,6 +30,7 @@ public:
 	std::string getClave() const;
 	int getDni()const;
 	int getTelefono()const;
+	void clonado( Clientes* c);
 
 
 };

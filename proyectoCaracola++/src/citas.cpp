@@ -18,5 +18,15 @@ int Cita::getDniCl() const{
 int Cita::getDniProf() const{
 	return this-> dniProf;
 }
+void Cita::borradoGeneral(){
+	this->dniCl=NULL;
+	this->dniProf=NULL;
+	this->matricula=NULL;
+}
+void Cita::clonado(Cita* c){
+	this->matricula=c->getMatricula();
+	this->dniCl=c->getDniCl();
+	this->dniProf=c->getDniProf();
+}
 
 }

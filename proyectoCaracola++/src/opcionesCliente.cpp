@@ -9,8 +9,9 @@ using namespace contenedorClientes;
 using namespace contenedorProfesor;
 using namespace contenedorCitas;
 
-void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor** misProfesores){
+void enunciadoOpcinesCliente(int &totalClientes, int totalProfesores, int totalVehiculos,int totalCitas, Clientes* misClientes, Cita** misCitas, Vehiculo** misVehiculos, Profesor** misProfesores, Clientes** cliente){
 	int opcion;
+	bool bandera;
 	do{
 		cout<<endl;
 		cout<<"Pulsa 1 para ver tus datos de forma detallada"<<endl;
@@ -35,16 +36,18 @@ void enunciadoOpcinesCliente(int totalClientes, int totalProfesores, int totalVe
 			pedirCita(totalClientes, totalProfesores, totalVehiculos, totalCitas, misClientes, misProfesores,misCitas, misVehiculos);
 			break;
 		case 4://para eliminar este cliente
+			opcion=eliminarCliente(totalClientes, totalCitas, misClientes, misCitas, cliente);
 
 			break;
-
 	}
-}while(opcion!=5);
+
+}while((opcion!=5));
 
 }
-void verInforDelCliente(int totalClientes, int totalCitas, Clientes* misClientes, Cita** misCitas){
+void verInforDelCliente(int& totalClientes, int totalCitas, Clientes* misClientes, Cita** misCitas){
 	mostrarClienteDetallado(misClientes);
 	//ahora comprobamos si hay alguna cita para este profesor
+	cout<<"Sus citas Programadas son: "<<endl;
 	for(int i=0;i<totalCitas;i++){
 		if(misCitas[i]->getDniCl()==misClientes->getDni()){
 			mostrarCitasDetallado(misCitas[i]);
@@ -103,7 +106,7 @@ void cambiarInformacionMecanismo(int opcionDos, Clientes *misClientes){
 
 	}
 }
-void pedirCita(int totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores,  Cita** misCitas, Vehiculo** misVehiculos ){
+void pedirCita(int &totalClientes, int totalProfesores, int totalVehiculos, int  &totalCitas, Clientes* misClientes, Profesor** misProfesores,  Cita** misCitas, Vehiculo** misVehiculos ){
 	int dni;
 	int matricula;
 	cout<<"En esta autoescuela hay los siguientes profesores: "<<endl;
@@ -155,10 +158,54 @@ bool comprobarMatricula(int totalVehiculo, int matricula, Vehiculo** misVehiculo
 	return existe;
 }
 void crearCitas(int& totalCitas, Cita** miscitas, int dniProfesor, int matricula, Clientes* misClientes){
-miscitas[totalCitas]=new Cita(matricula, misClientes->getDni(),dniProfesor);
-totalCitas++;
-cout<<"Cita creada"<<endl;
+	miscitas[totalCitas]=new Cita(matricula, misClientes->getDni(),dniProfesor);
+	totalCitas++;
+	cout<<"Cita creada"<<endl;
 }
-void eliminarCliente(int *totalClientes, int * totalCitas, Clientes* misClientes){
+int eliminarCliente(int &totalClientes, int &totalCitas, Clientes* misClientes,  Cita** misCitas, Clientes** cliente){
+	int bandera=4;
+	int seguro;
+	int totalcit=totalCitas;
+	int totalClie= totalClientes;
+	cout<<"vas a eliminarte de la lista, pulsa 1 si es correcto o otro numero si deseas salir"<<endl;
+	cin>>seguro;
+	if(seguro==1){
+		//hacemos una copia del cliente en cuestion
+		Clientes* temCliente = misClientes;
 
+		//primero borramos las citas asociadas a ese cliente
+		if(totalcit>1){
+			for(int z=0;z<totalcit;z++){
+				if(misClientes->getDni()==misCitas[z]->getDniCl()){
+
+					for(int q=z+1;q<totalcit;q++){//Si hay una coincidencia desde ese punto corremos el array
+						misCitas[q-1]->clonado(misCitas[q]);
+					}
+					totalCitas--;//reducimos el tamaño del array
+				}
+			}
+		}else{//si solo hay una cita en el array entra
+			if(temCliente->getDni()==misCitas[0]->getDniCl()){//comprobamos si la cita guardada es de nuestro cliente
+				misCitas[0]->borradoGeneral();
+				totalCitas--;
+			}
+		}
+
+		//ahora se borra el cliente en cuestion ya que no hay ninguna cita asociada a el
+		if(totalClie>1){
+			for(int z=totalClie+1;z< totalClie;z++){//for que corre la lista de los clientes
+				cliente[z-1]->clonado(cliente[z]);
+			}
+			totalClientes--;
+		}else{
+			delete misClientes;
+			totalClientes--;
+			cout<<totalClientes<<endl;
+		}
+		bandera=5;
+	}else{
+		cout<<"Has seleccionado no eliminar"<<endl;
+
+	}
+	return bandera;
 }
